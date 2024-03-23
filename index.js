@@ -10,6 +10,9 @@ app.use(bodyParser.urlencoded({extended: false}))
 app.use(bodyParser.json())
 
 app.get('/api', async (req, res) => res.send(getPostById(req.query.url)))
+app.get("/rss", async (req, res) => {
+  res.send(getFilteredRSSData(req.query.url, "ukraine"));
+});
 app.get('/', async (req, res) => {
   res.send(`/api/url?=https://instagram.com/ to get json data. \r\n /xigappid to re-evaluate x-ig-app-id if the bootstrapped value is outdated in some cases.`)
 })
