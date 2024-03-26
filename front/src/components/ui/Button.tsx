@@ -1,11 +1,12 @@
 import { FC, MouseEventHandler } from 'react';
 import Btn from '@mui/material/Button';
-export const Button:FC<{label:string,onClick:MouseEventHandler}> = ({label,onClick}) => {
+export const Button:FC<{label:string,onClick:MouseEventHandler,disabled?:boolean}> = ({label,onClick,disabled=false}) => {
   return (
     <Btn
       variant="outlined"
       size="medium"
       onClick={onClick}
+      disabled={disabled}
       sx={{
         backgroundColor: '#0000000A',
         border: 'none',

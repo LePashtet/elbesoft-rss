@@ -58,3 +58,16 @@
   }
 }
 
+@media (max-width:480px) {
+  .header{
+    padding-left: 10px;
+    &-center{
+      margin-left: 0px;
+      &-home{
+        margin-left: 0px; 
+        }
+    }
+
+  }
+}
+
