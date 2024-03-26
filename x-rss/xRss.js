@@ -1,12 +1,8 @@
 import puppeteer from 'puppeteer';
-import fs from 'fs';
 
 (async () => {
-    const myList = [];
     const myUrl = 'https://nitter.poast.org/Ukraine';
-    myList.push(myUrl);
     let checkpoint = true;
-    let count = 1;
     let cursor = '';
 
     const browser = await puppeteer.launch({headless: true});
@@ -56,11 +52,8 @@ import fs from 'fs';
 
             allTweets = allTweets.concat(tweets.map(tweet => ({url, ...tweet})));
 
-            console.log(`Scraped ${tweets.length} tweets from ${url}`);
-            console.log(allTweets)
         } catch (error) {
             console.log(error)
-            console.log('Reached the end, ending the program…');
             checkpoint = false;
         }
     }
