@@ -1,6 +1,7 @@
 import { useNavigate } from 'react-router-dom'
 import { Button } from '../ui/Button'
 import { Chip } from '../ui/Chip'
+import BackgroundImg from '../../assets/step3-img.svg'
 import './Step3.scss'
 
 export const Step3=()=>{
@@ -10,6 +11,7 @@ export const Step3=()=>{
   };
   return(
     <div className='step3'>
+      <img src={BackgroundImg} className='step3-image'/>
       <h1 className='step3-title'>Pick location</h1>
       <div className='step3-chips'>
       <Chip label='Email'/>

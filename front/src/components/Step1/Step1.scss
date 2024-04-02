@@ -3,8 +3,17 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  height: 100%;
+  &-image{
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    right: 0;
+    bottom: 0;
+    top: 0;
+    z-index: -1;
+  }
   &-title{
-    font-family: 'Montserrat';
     font-size: 25px;
     line-height: 30.5px;
     font-weight: 400;
@@ -16,7 +25,6 @@
     margin-bottom: 20px;
   }
   &-count{
-    font-family: 'Montserrat';
     font-size: 14px;
     line-height: 36px;
     font-weight: 500;
@@ -24,7 +32,6 @@
     margin-bottom: 20px;
   }
   &-link{
-    font-family: 'Montserrat';
     font-size: 12px;
     line-height: 14.5px;
     font-weight: 400;

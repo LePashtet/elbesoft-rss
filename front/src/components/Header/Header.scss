@@ -3,13 +3,18 @@
   justify-content: space-between;
   align-items: center;
   padding: 15px 10px;
-
   &-center {
     display: flex;
     justify-content: center;
     align-items: center;
     flex-grow: 1;
-    margin-left: 200px; 
+    margin-left: 140px; 
+    @media (max-width:767px) {
+      margin-left:10px;
+    }
+    @media (max-width:480px) {
+      margin-left: 20px;
+    }
 
     &-home,
     &-faq {
@@ -17,12 +22,15 @@
       margin-left: 50px; 
       display: flex;
       align-items: center;
+      @media (max-width:767px) {
+        margin-left: 20px; 
+        margin-right: 20px;
+      }
       &_text {
         font-size: 20px;
         line-height: 25px;
         letter-spacing: 0.8px;
         text-align: center;
-        font-family: 'Montserrat';
         font-weight: 400;
         margin-left: 5px;
       }
@@ -33,41 +41,36 @@
     display: flex;
     align-items: center;
     &_text{
-      font-family: 'Montserrat';
       font-size: 12px;
       line-height: 15px;
       letter-spacing: 0.8px;
       text-align: center;
-      font-family: 'Montserrat';
       font-weight: 400;
       margin-right: 10px;
+      @media (max-width:767px) {
+        display: none;
+      }
     }
   }
 }
 @media (max-width:767px) {
   .header{
     &-center{
-      margin-left: 0px;
       &-home,
       &-faq {
         margin-left: 20px; 
         margin-right: 20px;
         }
     }
-
   }
 }
 
 @media (max-width:480px) {
   .header{
-    padding-left: 10px;
     &-center{
-      margin-left: 0px;
       &-home{
         margin-left: 0px; 
-        }
+      }
     }
-
   }
 }
-

@@ -2,6 +2,7 @@ import {FC, useState} from 'react'
 import {useNavigate} from 'react-router-dom'
 import {Button} from '../ui/Button'
 import {Chip} from '../ui/Chip'
+import BackgroundImg from '../../assets/step2-img.svg'
 import './Step2.scss'
 
 //TODO
@@ -25,6 +26,7 @@ export const Step2: FC = () => {
 
     return (
         <div className='step2'>
+            <img src={BackgroundImg} className='step2-image'/>
             <h1 className='step2-title'>Pick Time</h1>
             <div className='step2-chips'>
                 <Chip
