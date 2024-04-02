@@ -43,7 +43,12 @@ export const Step1 = () => {
             </div>
             <span className='step1-count'>0/3</span>
             <Button onClick={handleButtonClick} label='ready'/>
-            <a className='step1-link'>Can’t find source? Let us know!</a>
+            <a 
+                className='step1-link' 
+                href='mailto:contact@elbesoft.agency?subject=Can’t%20find%20source%3F%20Let%20us%20know!' 
+            >
+                Can’t find source? Let us know!
+            </a>
         </div>
     )
 }

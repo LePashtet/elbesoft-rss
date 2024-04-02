@@ -9,7 +9,12 @@ export const Home=()=>{
     <div className='home-button'>
     <Button onClick={()=>{}} label='Remove'/>
     </div>
-    <a className='home-link'>Want to have more? Let us know!</a>
+        
+    <a className='home-link' 
+    href='mailto:contact@elbesoft.agency?subject=Want%20to%20have%20more?%20Let%20us%20know!'
+    >
+      Want to have more? Let us know!
+    </a>
     </div>
   )
 }
