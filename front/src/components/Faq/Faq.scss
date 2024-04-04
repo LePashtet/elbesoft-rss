@@ -1,17 +1,4 @@
 .accodrion{
   height: 100%;
   margin-top: 150px;
-  &-image{
-    position: absolute;
-    z-index: -1;
-    left: 5%;
-    top:10%;
-    width: 90%;
-    @media (max-width:1024px) {
-        top:20%;
-    }
-    @media (max-width:767px) {
-        top:25%;
-    }
-  }
 }

@@ -5,19 +5,6 @@
   @media (max-width:767px) {
       width: 90%;
     }
-  &-image{
-    position: absolute;
-    z-index: -1;
-    left: 5%;
-    top:10%;
-    width: 90%;
-    @media (max-width:1024px) {
-        top:20%;
-    }
-    @media (max-width:767px) {
-        top:25%;
-    }
-  }
   &-title{
     font-size: 25px;
     line-height: 30.5px;

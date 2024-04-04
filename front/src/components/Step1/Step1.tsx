@@ -1,7 +1,6 @@
 import {Button} from '../ui/Button'
 import {useNavigate} from 'react-router-dom'
 import {Source, SourceSelector} from "../SourceSelector/SourceSelector.tsx";
-import BackgroundImg from '../../assets/step1-img.svg'
 import './Step1.scss'
 import {useState} from "react";
 
@@ -35,7 +34,6 @@ export const Step1 = () => {
 
     return (
         <div className='step1'>
-            <img src={BackgroundImg} className='step1-image'/>
             <h1 className='step1-title'>Select Sources</h1>
             <div className='step1-chips'>
                 <SourceSelector type="instagram" onSelect={addActiveSource}/>

@@ -1,6 +1,5 @@
-import { forwardRef,RefObject } from "react";
+import {FC,forwardRef,RefObject } from "react";
 import clsx from "clsx";
-import {FC} from "react";
 
 import "./backdrop.scss"
 
