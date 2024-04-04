@@ -1,7 +1,7 @@
 import {FC, useState} from 'react'
 import {useNavigate} from 'react-router-dom'
 import {Button} from '../ui/Button'
-import {Chip} from '../ui/Chip'
+import {Chip} from '../ui/Chip/Chip'
 import './Step2.scss'
 
 //TODO
@@ -15,7 +15,7 @@ export const Step2: FC = () => {
     const navigator = useNavigate()
 
     const handleButtonClick = () => {
-        navigator('/page/step3');
+        navigator('/setup/target');
     };
 
     const handleChipClick = (label: string) => {
@@ -31,13 +31,11 @@ export const Step2: FC = () => {
                     label='5 AM'
                     onClick={() => handleChipClick('5 AM')}
                     isSelected={selectedChip === '5 AM'}
-                    type='click'
                 />
                 <Chip
                     label='5 PM'
                     onClick={() => handleChipClick('5 PM')}
                     isSelected={selectedChip === '5 PM'}
-                    type='click'
                 />
             </div>
             <Button onClick={handleButtonClick} label='Confirm' disabled={!selectedChip}/>
