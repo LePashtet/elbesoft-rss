@@ -1,0 +1,293 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "News + Letter 1.0",
+    "description": "LATER",
+    "termsOfService": "http://www.apache.org/licenses/LICENSE-2.0.html",
+    "contact": {
+      "email": "contact@elbesoft.agency"
+    },
+    "license": {
+      "name": "Apache 2.0",
+      "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+    },
+    "version": "0.0.1"
+  },
+  "externalDocs": {
+    "description": "Project Links",
+    "url": "http://swagger.io"
+  },
+  "servers": [
+    {
+      "url": "/api/v1"
+    }
+  ],
+  "tags": [
+    {
+      "name": "newsletter",
+      "description": "Everything about newsletters",
+      "externalDocs": {
+        "description": "External docs link",
+        "url": "http://swagger.io"
+      }
+    }
+  ],
+  "paths": {
+    "/newsletter": {
+      "get": {
+        "tags": [
+          "newsletter"
+        ],
+        "summary": "Get all Newsletters",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "example": {
+                  "success": true,
+                  "newsletter": [{
+                    "success": true,
+                    "newsletter": [
+                      {
+                        "id": "660c7753ace8c4fcd04aaa09",
+                        "user": "123876766546545433232333",
+                        "sources": [
+                          "660c7753ace8c4fcd04aaa07"
+                        ],
+                        "time": "17",
+                        "location": "CZ-cz",
+                        "createdAt": "2024-04-02T21:23:31.884Z"
+                      },
+                      {
+                        "id": "660c776dea3e050ccf70c116",
+                        "user": "123876766546545433232333",
+                        "sources": [
+                          "660c776dea3e050ccf70c114"
+                        ],
+                        "time": "17",
+                        "location": "CZ-cz",
+                        "createdAt": "2024-04-02T21:23:57.308Z"
+                      }
+                    ]
+                  }]
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Tasks not found",
+            "content": {
+              "application/json": {
+                "example": {
+                  "success": false,
+                  "error": "Tasks not found"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "newsletter"
+        ],
+        "summary": "Create Newsletter",
+        "parameters": [],
+        "requestBody": {
+          "description": "Create a new newsletter for user",
+          "content": {
+            "application/json": {
+              "example": {
+                "email": "pashaload@gmail.com",
+                "sources": [
+                  {
+                    "link": "https://www.instagram.com/<?username?>",
+                    "keywords": ["keyword1"],
+                    "type": "instagram"
+                  }
+                ],
+                "time": "17",
+                "location": "CZ-cz"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "example": {
+                  "success": true,
+                  "task": {
+                    "id": "660c7645be07fb1e04aba7d9",
+                    "user": "123876766546545433232333",
+                    "sources": [
+                      "660c7645be07fb1e04aba7d7"
+                    ],
+                    "time": "17",
+                    "location": "CZ-cz",
+                    "createdAt": "2024-04-02T21:19:01.415Z"
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Error",
+            "content": {
+              "application/json": {
+                "example": {
+                  "success": false
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/newsletter/{id}": {
+      "delete": {
+        "tags": [
+          "newsletter"
+        ],
+        "summary": "Delete Newsletter",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "description": "Newsletter id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "example": {
+                  "success": true
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Newsletter not found",
+            "content": {
+              "application/json": {
+                "example": {
+                  "success": false,
+                  "error": "Newsletter not found"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Order": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64",
+            "example": 10
+          },
+          "petId": {
+            "type": "integer",
+            "format": "int64",
+            "example": 198772
+          },
+          "quantity": {
+            "type": "integer",
+            "format": "int32",
+            "example": 7
+          },
+          "shipDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "status": {
+            "type": "string",
+            "description": "Order Status",
+            "example": "approved",
+            "enum": [
+              "placed",
+              "approved",
+              "delivered"
+            ]
+          },
+          "complete": {
+            "type": "boolean"
+          }
+        },
+        "xml": {
+          "name": "order"
+        }
+      },
+      "ApiResponse": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "type": {
+            "type": "string"
+          },
+          "message": {
+            "type": "string"
+          }
+        },
+        "xml": {
+          "name": "##default"
+        }
+      }
+    },
+    "requestBodies": {
+      "Pet": {
+        "description": "Pet object that needs to be added to the store",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Pet"
+            }
+          },
+          "application/xml": {
+            "schema": {
+              "$ref": "#/components/schemas/Pet"
+            }
+          }
+        }
+      }
+    },
+    "securitySchemes": {
+      "petstore_auth": {
+        "type": "oauth2",
+        "flows": {
+          "implicit": {
+            "authorizationUrl": "https://petstore3.swagger.io/oauth/authorize",
+            "scopes": {
+              "write:pets": "modify pets in your account",
+              "read:pets": "read your pets"
+            }
+          }
+        }
+      },
+      "api_key": {
+        "type": "apiKey",
+        "name": "api_key",
+        "in": "header"
+      }
+    }
+  }
+}
