@@ -4,14 +4,13 @@ const {Schema} = mongoose;
 
 const NewsLetterSchema = new Schema(
     {
-        name: {
+        link: {
             type: String,
             required: true,
         },
-        categories: {
-            type: Date,
-            required: true,
-        },
+        keywords: [{
+            type: String
+        }],
         type: {
             type: String,
             required: true,
@@ -25,4 +24,4 @@ const NewsLetterSchema = new Schema(
     {optimisticConcurrency: true},
 );
 
-module.exports = mongoose.model('newsletter', NewsLetterSchema);
+module.exports = mongoose.model('sources', NewsLetterSchema);

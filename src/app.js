@@ -32,7 +32,7 @@ app.use('/docs', docs);
 app.use('/health', health);
 
 // V1 API
-app.use('/v1', v1);
+app.use('/api/v1', v1);
 
 // error handler
 app.use(errorHandler);

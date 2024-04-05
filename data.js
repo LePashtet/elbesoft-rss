@@ -4,7 +4,7 @@ const data = {
             "name": "instagram",
             "categories": {
                 "profile": {
-                    "username": "https://www.instagram.com/api/graphql",
+                    "username": "https://www.instagram.com/<?username?>",
                     "isReplaceable": ["username"]
                 }
             },

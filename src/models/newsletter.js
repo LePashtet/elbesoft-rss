@@ -6,19 +6,20 @@ const NewsLetterSchema = new Schema(
     {
         user: {
             type: Schema.Types.ObjectId,
-            ref: 'user'
+            ref: 'user',
+            required: true
         },
         sources: [{
-            type: String,
-            required: true,
+            type: Schema.Types.ObjectId,
+            ref: 'sources',
+            required: true
         }],
         time: {
-            type: Date,
+            type: String,
             required: true,
         },
         location: {
             type: String,
-            required: true,
         },
         createdAt: {
             type: Date,
