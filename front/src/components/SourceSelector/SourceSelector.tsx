@@ -6,57 +6,54 @@ import { SourceChip } from "./SourceChip.tsx";
 
 export type Source = "instagram" | "x" | 'medium'|"techCrunch"|'theGuardian'|'europeanParliament'|'nyTimes'|'googleDailyMix';
 interface SourceSelectorProps {
-    onSelect: (type: Source, text: string) => void ;
-    type: Source;
-    param?: string;
-    onRemove: () => void;
-    disabled?: boolean;
+  onSelect: (type: Source, text: string, userCountry: any) => void;
+  type: Source;
+  param?: string;
+  onRemove: () => void;
+  disabled?: boolean;
 }
 
 
 export const SourceSelector: FC<SourceSelectorProps> = ({ type = "instagram", param, onSelect, onRemove, disabled }) => {
-    const [openModal, setOpenModal] = useState(false);
-    const [isDisabled, setIsDisabled] = useState(disabled);
-    const [userCountry, setUserCountry] = useState('');
+  const [openModal, setOpenModal] = useState(false);
+  const [isDisabled, setIsDisabled] = useState(disabled);
+  const [userCountry, setUserCountry] = useState('');
 
-    useEffect(() => {
-        setIsDisabled(disabled); 
-    }, [disabled]);
+  useEffect(() => {
+    setIsDisabled(disabled);
+  }, [disabled]);
 
-    const clickHandler = async () => {
-            if(isDisabled) return;
-            setOpenModal(true);
+  const clickHandler = async () => {
+    if(isDisabled) return;
+    setOpenModal(true);
 
-            if (type === 'googleDailyMix') {
-                const country = await getUserApi();
-                if (country) {
-                    setUserCountry(country);
-                }
+    const country = await getUserApi();
+    if (country) {
+      setUserCountry(country);
+    }
+  };
 
-            }
-    };
+  const selectHandler = (text: string) => {
+    onSelect(type!, text, userCountry);
+    setOpenModal(false);
+  };
 
-    const selectHandler = (text: string) => {
-            onSelect(type!, text);
-            setOpenModal(false);
-    };
-
-    const source = useMemo(() => {
-        return (
-            <SourceChip
-                type={type!}
-                param={param}
-                isSelected={!!param}
-                onClick={param ? () => {} : clickHandler }
-                onRemove={param ? onRemove : undefined}
-            />
-        );
-    }, [type, param, clickHandler, onRemove]);
-
+  const source = useMemo(() => {
     return (
-        <>
-            {source}
-            {openModal && <RssConfirmationModal type={type} handleClose={selectHandler} />}
-        </>
+      <SourceChip
+        type={type!}
+        param={param}
+        isSelected={!!param}
+        onClick={param ? () => {} : clickHandler }
+        onRemove={param ? onRemove : undefined}
+      />
     );
+  }, [type, param, clickHandler, onRemove]);
+
+  return (
+    <>
+      {source}
+      {openModal && <RssConfirmationModal type={type} handleClose={selectHandler} />}
+    </>
+  );
 };

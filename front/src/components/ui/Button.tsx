@@ -1,6 +1,17 @@
-import { FC, MouseEventHandler } from 'react';
-import Btn from '@mui/material/Button';
-export const Button:FC<{label:string,onClick:MouseEventHandler,disabled?:boolean}> = ({label,onClick,disabled=false}) => {
+import { FC, MouseEventHandler } from "react";
+import Btn from "@mui/material/Button";
+
+interface ButtonProps {
+  label: string;
+  onClick: MouseEventHandler;
+  disabled?: boolean;
+}
+
+export const Button: FC<ButtonProps> = ({
+  label,
+  onClick,
+  disabled = false,
+}) => {
   return (
     <Btn
       variant="outlined"
