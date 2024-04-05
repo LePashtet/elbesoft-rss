@@ -1,8 +1,8 @@
-import { Button } from '../ui/Button';
-import { useNavigate } from 'react-router-dom';
-import { Source, SourceSelector } from "../SourceSelector/SourceSelector";
-import { useState } from "react";
-import './Step1.scss';
+import {Button} from '../ui/Button'
+import {useNavigate} from 'react-router-dom'
+import {Source, SourceSelector} from "../SourceSelector/SourceSelector.tsx";
+import {useState} from "react";
+import './Step1.scss'
 
 const sourceSelectors:Source[] = [
     "instagram",

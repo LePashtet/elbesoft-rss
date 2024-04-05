@@ -21,7 +21,7 @@ export const Accordions = () => {
             key={index}
             expanded={expanded === panel}
             onChange={handleExpansion(panel)}
-            sx={{ maxWidth: '560px', border: 'none',boxShadow:'none',marginBottom:'10px' }} 
+            sx={{ maxWidth: '560px', border: 'none',boxShadow:'none',marginBottom:'10px',backgroundColor:'transparent' }} 
           >
             <AccordionSummary
               expandIcon={<ExpandMoreIcon />}
