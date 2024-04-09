@@ -39,7 +39,7 @@ export const CustomAutocomplete: FC<CustomAutocomleteProps> = ({ value, onChange
       break;
   }
 
-  const handleAutocompleteChange = (event: React.SyntheticEvent<Element, Event>, newValue: string | null) => {
+  const handleAutocompleteChange = (_event: React.SyntheticEvent<Element, Event>, newValue: string | null) => {
     if (newValue !== null) {
       onChange(newValue);
     }

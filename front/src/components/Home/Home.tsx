@@ -1,37 +1,81 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { Button } from "../ui/Button";
-import { getNewsletters } from "../../api/GetNewsletters";
+import { getNewsletters, deleteNewsletter } from "../../api/newslettersApi";
 import "./Home.scss";
-import { deleteNewsletters } from "../../api/deleteNewsletters";
+
+interface NewsletterSource {
+  id: string;
+  user: string;
+  sources: string[];
+  time?: string;
+  location: string;
+  createdAt: string;
+}
 
 export const Home = () => {
-  const [newsletters, setNewsletters] = useState<any[]>([]);
+  const [newsletters, setNewsletters] = useState<NewsletterSource[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(false); 
 
   useEffect(() => {
-    const fetchData = async () => {
-      const fetchedNewsletters = await getNewsletters();
-      setNewsletters(fetchedNewsletters);
-    };
-
-    fetchData();
+    getNewsletters()
+      .then((fetchedNewsletters) => {
+        if (fetchedNewsletters) {
+          setNewsletters(fetchedNewsletters);
+        } else {
+          setError(true); 
+        }
+      })
+      .catch((err) => {
+        console.error("Error getting newsletters", err);
+        setError(true); 
+      })
+      .finally(() => {
+        setLoading(false); 
+      });
   }, []);
+  
 
-  const removeAllNewsletters = async () => {
-    await deleteNewsletters({ newsletters, setNewsletters });
-  };
+  const removeNewsletter = async (_id: string) => {    
+    const success = await deleteNewsletter(_id);
+    if (success) {
+      setNewsletters(newsletters.filter((newsletter) => newsletter.id !== _id));
+    }
+};
+
+const renderNewsletters = useCallback(() => {
   return (
-    <div className='home'>
-      <h1 className='home-title'>Telegram + Email</h1>
-      <span className='home-text'>5 AM + 5 PM</span>
-      <div className='home-button'>
-        <Button onClick={removeAllNewsletters} label='Remove' />
+    newsletters.map((newsletter) => (
+      <div className="home-newsletter" key={newsletter.id}>
+        <h2 className="home-newsletter-title">{newsletter.sources}</h2>
+        <p className="home-newsletter-time">{newsletter.time}</p>
+        <Button onClick={() => removeNewsletter(newsletter.id)} label="Remove" />
+      </div>
+    ))
+  );
+}, [newsletters]);
+
+
+  return (
+    <div className="home">
+      <div className="home-newsletters">
+      {loading ? (
+          <p>Loading...</p>
+        ) : error ? (
+          <p>Error loading newsletters.</p>
+        ) : newsletters.length > 0 ? (
+          renderNewsletters()
+        ) : (
+          <p>No newsletters found.</p>
+        )}
       </div>
 
-      <a className='home-link'
-        href='mailto:contact@elbesoft.agency?subject=Want%20to%20have%20more?%20Let%20us%20know!'
+      <a
+        className="home-link"
+        href="mailto:contact@elbesoft.agency?subject=Want%20to%20have%20more?%20Let%20us%20know!"
       >
         Want to have more? Let us know!
       </a>
     </div>
-  )
-}
+  );
+};

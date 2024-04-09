@@ -11,9 +11,7 @@ export const Button: FC<ButtonProps> = ({
   label,
   onClick,
   disabled = false,
-}) => {
-  return (
-    <Btn
+}) => <Btn
       variant="outlined"
       size="medium"
       onClick={onClick}
@@ -38,5 +36,3 @@ export const Button: FC<ButtonProps> = ({
     >
       {label}
     </Btn>
-  );
-};

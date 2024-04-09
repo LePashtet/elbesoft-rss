@@ -1,20 +1,20 @@
 import {FC, useState} from 'react'
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import {Button} from '../ui/Button'
 import {Chip} from '../ui/Chip/Chip'
 import './Step2.scss'
+import { useSourceContext } from '../../store/Context.tsx';
+
 
 export const Step2: FC = () => {
-  const [selectedChip, setSelectedChip] = useState<string | null>(null);
+  const [selectedChip, setSelectedChip] = useState<string>('');
   const navigator = useNavigate()
+  const { updateTime } = useSourceContext();
 
-  const location = useLocation();
-  const sources = location.state?.sources || [];
-  const userCountry = location.state?.userCountry || [];
+
   const handleButtonClick = () => {
-    navigator('/setup/target', {
-      state: { sources, time: selectedChip, userCountry },
-    });
+    updateTime(selectedChip)
+    navigator('/setup/target');
   };
 
   const handleChipClick = (label: string) => {
@@ -27,13 +27,13 @@ export const Step2: FC = () => {
       <div className='step2-chips'>
         <Chip
           label='5 AM'
-          onClick={() => handleChipClick('5 AM')}
-          isSelected={selectedChip === '5 AM'}
+          onClick={() => handleChipClick('5')}
+          isSelected={selectedChip === '5'}
         />
         <Chip
           label='5 PM'
-          onClick={() => handleChipClick('5 PM')}
-          isSelected={selectedChip === '5 PM'}
+          onClick={() => handleChipClick('17')}
+          isSelected={selectedChip === '17'}
         />
       </div>
       <Button onClick={handleButtonClick} label='Confirm' disabled={!selectedChip}/>

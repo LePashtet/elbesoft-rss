@@ -1,84 +1,79 @@
 import { useState, ChangeEvent } from 'react';
-import { useNavigate, useLocation } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { Button } from '../ui/Button';
 import { Chip } from '../ui/Chip/Chip';
 import { FormatSources } from './FormatSources';
-import { postNewsletters } from '../../api/postNewsletters';
+import { postNewsletters } from '../../api/newslettersApi';
 import { Input } from '../ui/Input';
 import './Step3.scss';
+import { useSourceContext } from '../../store/Context.tsx';
 
 export const Step3 = () => {
   const navigator = useNavigate();
-  const [isClicked, setIsClicked] = useState(false);
+  const [isEmailClicked, setIsEmailClicked] = useState(false);
   const [email, setEmail] = useState("");
-  const [isValidEmail, setIsValidEmail] = useState(false);
+  const [isEmailValid, setIsEmailValid] = useState(false); 
+  const [selectedChip, setSelectedChip] = useState<string>('');
   const [isEmailInputVisited, setIsEmailInputVisited] = useState(false);
-
-  const location = useLocation();
-  const { sources = [], time = [], userCountry = [] } = location.state || {};
+  const { sources, userCountry, time } = useSourceContext();
 
   const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
     setEmail(event.target.value);
   };
 
-  const handleInputBlur = () => {
-    const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    const isValid = regex.test(email);
-    setIsValidEmail(isValid);
-    setIsEmailInputVisited(true);
-  };
-
   const handleButtonClick = async () => {
-    if (isValidEmail) {
-      try {
+    if (isEmailValid) {
         const formattedSources = FormatSources(sources);
         const data = {
           email: email,
           sources: formattedSources,
-          time,
+          time:time,
           location: userCountry,
         };
-        await postNewsletters(data);
+        const  response = await postNewsletters(data);
+        if(response===true){
         navigator("/");
-      } catch (error) {
-        console.error("Error:", error);
+        
       }
     }
   };
 
-  const ClickHandler = () => {
-    setIsClicked(!isClicked);
+  const handleChipClick = (label: string) => {
+    setSelectedChip(label);
+    if(label==='Email'){
+    setIsEmailClicked(!isEmailClicked);
+    
+    }
   };
 
   return(
     <div className='step3'>
       <h1 className='step3-title'>Pick location</h1>
       <div className='step3-chips'>
-        <Chip onClick={ClickHandler} label='Email' isSelected={isClicked} />
-        <Chip onClick={()=>{}} type='disable' label='Telegram Bot'/>
-        <Chip onClick={()=>{}} type='disable' label='RSS'/>
-        <Chip onClick={()=>{}} type='disable' label='Pigeon Mail'/>
-
+        <Chip onClick={()=>handleChipClick('Email')} label='Email' isSelected={isEmailClicked} />
+        <Chip onClick={()=>handleChipClick('Telegram Bot')} type='disable' label='Telegram Bot'/>
+        <Chip onClick={()=>handleChipClick('RSS')} type='disable' label='RSS'/>
+        <Chip onClick={()=>handleChipClick('Pigeon Mail')} type='disable' label='Pigeon Mail'/>
       </div>
-      {isClicked && (
+      {isEmailClicked && (
         <div className='step3-input'>
           <Input
             onChange={handleInputChange}
-            onBlur={handleInputBlur}
+            onBlur={() => setIsEmailInputVisited(true)} 
             value={email}
             placeholder='Email'
             type='email'
+            onValidChange={(isValid:boolean)=>setIsEmailValid(isValid)} 
+            visited={isEmailInputVisited} 
           />
-          {isEmailInputVisited && !isValidEmail && (
-            <p className='step3-error-message'>Invalid email address</p>
-          )}
+
         </div>
       )}
       <Button
         onClick={handleButtonClick}
-        disabled={!isValidEmail}
+        disabled={!isEmailValid} 
         label='Start the magic!'
       />
     </div>
-  )
-}
+  );
+};

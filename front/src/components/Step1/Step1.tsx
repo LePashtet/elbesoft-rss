@@ -2,7 +2,9 @@ import {Button} from '../ui/Button'
 import {useNavigate} from 'react-router-dom'
 import {Source, SourceSelector} from "../SourceSelector/SourceSelector.tsx";
 import {useState,FC} from "react";
+import { useSourceContext } from '../../store/Context.tsx';
 import './Step1.scss'
+
 
 const sourceSelectors:Source[] = [
   "instagram",
@@ -17,26 +19,28 @@ const sourceSelectors:Source[] = [
 
 export const Step1: FC = () => {
   const navigator = useNavigate();
+  const { updateData } = useSourceContext();
 
   const [sources, setSources] = useState<
-    Array<{ type: Source; param?: string }>
+    Array<{ type: Source; userInput: string }>
   >([]);
   const [counter, setCounter] = useState(0);
   const [userCountry, setUserCountry] = useState("");
 
   const handleButtonClick = () => {
     navigator("/setup/time", { state: { sources, userCountry } });
+    updateData(sources, userCountry);
   };
-  const addActiveSource = (type: Source, param?: string, userCountry?: any) => {
+  const addActiveSource = (type: Source, userInput: string, userCountry?: any) => {
     if (counter < 5) {
-      setSources([...sources, { type, param }]);
+      setSources([...sources, { type, userInput }]);
       setCounter(counter + 1);
       setUserCountry(userCountry);
     }
   };
 
-  const removeActiveSource = (type: Source, param?: string) => {
-    const updatedSources = sources.filter(item => !(item.type === type && item.param === param));
+  const removeActiveSource = (type: Source, userInput: string) => {
+    const updatedSources = sources.filter(item => !(item.type === type && item.userInput === userInput));
     setSources(updatedSources);
     setCounter(updatedSources.length);
   };
@@ -50,11 +54,11 @@ export const Step1: FC = () => {
         ])}
         {sources.map((item) => (
           <SourceSelector
-            key={`${item.type}-${item.param}`}
+            key={`${item.type}-${item.userInput}`}
             type={item.type}
-            param={item.param}
+            userInput={item.userInput}
             onSelect={()=>{}}
-            onRemove={() => removeActiveSource(item.type, item.param)}
+            onRemove={() => removeActiveSource(item.type, item.userInput)}
           />
         ))}
       </div>
@@ -69,3 +73,4 @@ export const Step1: FC = () => {
     </div>
   );
 };
+

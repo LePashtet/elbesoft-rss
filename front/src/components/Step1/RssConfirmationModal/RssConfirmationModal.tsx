@@ -9,8 +9,8 @@ import "./RssConfirmationModal.scss"
 
 
 export const RssConfirmationModal: FC<{ handleClose: (text: string) => void,type?:string}> = ({handleClose,type}) => {
-    const [text, setText] = useState("")
-    const [errorVisible,setErrorVisible]=useState(false)
+    const [text, setText] = useState<string>("")
+    const [errorVisible,setErrorVisible]=useState<boolean>(false)
 
     const isRss =type!=='x' && type!=='instagram' && type!=='medium'&& type!=='googleDailyMix'
 
