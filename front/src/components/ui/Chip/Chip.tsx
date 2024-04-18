@@ -1,7 +1,7 @@
 import { FC } from "react";
 import ChipClick from '@mui/material/Chip';
 import Avatar from '@mui/material/Avatar';
-import ChipIcon from './ChipIcon'; // Импортируем новый компонент
+import ChipIcon from './ChipIcon';
 import { Source } from "../../SourceSelector/SourceSelector";
 
 interface ChipProps {

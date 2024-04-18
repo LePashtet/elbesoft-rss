@@ -4,39 +4,39 @@ import { Source } from "./SourceSelector.tsx";
 
 interface SourceChipProps {
     type: Source;
-    param?: string;
+    userInput?: string;
     isSelected: boolean;
     onClick: () => void;
     onRemove?: () => void;
 }
 
-export const SourceChip: FC<SourceChipProps> = ({ type, param, isSelected, onClick, onRemove }) => {
+export const SourceChip: FC<SourceChipProps> = ({ type, userInput, isSelected, onClick, onRemove }) => {
     let label;
 
     switch (type) {
         case "instagram":
-            label = `Instagram profile of @${param ? param : "______"}`;
+            label = `Instagram profile of @${userInput ? userInput : "______"}`;
             break;
         case "x":
-            label = `X profile of @${param ? param : "______"}`;
+            label = `X profile of @${userInput ? userInput : "______"}`;
             break;
         case "medium":
-            label = `Medium profile of @${param ? param : "______"}`;
+            label = `Medium profile of @${userInput ? userInput : "______"}`;
             break;
         case "techCrunch":
-            label = `TechCrunch topic of news is ${param ? param : "______"}`;
+            label = `TechCrunch topic of news is ${userInput ? userInput : "______"}`;
             break;
         case "theGuardian":
-            label = `The Guardian topic of news is ${param ? param : "______"}`;
+            label = `The Guardian topic of news is ${userInput ? userInput : "______"}`;
             break;
         case "europeanParliament":
-            label = `Euro Parliament topic of news is ${param ? param : "______"}`;
+            label = `Euro Parliament topic of news is ${userInput ? userInput : "______"}`;
             break;
         case "nyTimes":
-            label = `NYTimes topic of news is ${param ? param : "______"}`;
+            label = `NYTimes topic of news is ${userInput ? userInput : "______"}`;
             break;
         case "googleDailyMix":
-            label = `Google Daily Mix topic of news is ${param ? param : "______"}`;
+            label = `Google Daily Mix topic of news is ${userInput ? userInput : "______"}`;
             break;
         default:
             label = "profile of @ ______";
