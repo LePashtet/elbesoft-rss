@@ -8,6 +8,7 @@ const health = require('./routes/health');
 const v1 = require('./routes/v1');
 const { errorHandler } = require('./middlewares/error');
 const logger = require('./middlewares/logger');
+var cors = require('cors');
 
 const app = express();
 
@@ -17,6 +18,9 @@ app.use(express.json());
 
 // logger
 app.use(logger);
+
+app.use(cors());
+
 
 // sanitize request data
 app.use(xss());
@@ -30,7 +34,6 @@ app.use('/docs', docs);
 
 // health API
 app.use('/health', health);
-
 // V1 API
 app.use('/api/v1', v1);
 

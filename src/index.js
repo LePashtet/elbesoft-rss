@@ -1,4 +1,5 @@
 const path = require('path');
+
 const db = require('./db');
 const app = require('./app');
 const { createConfig } = require('./config/config');

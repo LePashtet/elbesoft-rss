@@ -13,6 +13,34 @@
     letter-spacing: 4px;
     margin-bottom: 25px;
   }
+  &-newsletters {
+    max-height: 304px; 
+    overflow-y: auto; 
+    width: 580px; 
+  }
+  &-newsletter{
+    border-bottom: 1px solid #BFBFBF;
+    padding-bottom: 20px;
+    height: 135px;
+    &-title{
+      font-size: 25px;
+      line-height: 30.5px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      font-weight: 400;
+      margin-bottom: 0;
+      margin-top: 30px;
+    }
+    &-time{
+      font-size: 20px;
+      line-height: 24.5px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      font-weight: 400;
+      margin: 25px 0;
+      color:#00000099
+    }
+  }
   &-text{
     font-size: 16px;
     line-height: 20px;

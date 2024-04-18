@@ -8,7 +8,7 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 export const Accordions = () => {
   const [expanded, setExpanded] = useState<string | false>(false);
 
-  const handleExpansion = (panel: string) => (event: ChangeEvent<{}>, isExpanded: boolean) => {
+  const handleExpansion = (panel: string) => (_event: ChangeEvent<{}>, isExpanded: boolean) => {
     setExpanded(isExpanded ? panel : false); 
   };
 
