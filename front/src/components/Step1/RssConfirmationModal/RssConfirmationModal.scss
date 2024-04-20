@@ -34,6 +34,10 @@
 
     & .modal-action {
       margin: 20px 0 4px 0;
+
+     button {
+       margin-right: 10px;
+     }
     }
   }
   &-error{

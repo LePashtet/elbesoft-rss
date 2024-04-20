@@ -18,11 +18,7 @@ const logger = require("../config/logger");
 const getAllNewsletter = catchAsync(async (req, res) => {
     const result = await NewsletterModel.find();
 
-    if (result.length) {
-        res.status(200).json({success: true, newsletter: result.map(item => toDto(item))});
-    } else {
-        res.status(404).json({success: false, error: 'Tasks not found'});
-    }
+        res.status(200).json({success: true, newsletter: result?.map(item => toDto(item)) || []});
 });
 
 const createNewsletter = catchAsync(async (req, res) => {
