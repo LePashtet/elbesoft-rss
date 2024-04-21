@@ -3,7 +3,15 @@ import { RssConfirmationModal } from "../Step1/RssConfirmationModal/RssConfirmat
 import { getUserApi } from "../../api/getUserApi.ts";
 import { SourceChip } from "./SourceChip.tsx";
 
-export type Source = "instagram" | "x" | 'medium'|"techCrunch"|'theGuardian'|'europeanParliament'|'nyTimes'|'googleDailyMix';
+export type Source =
+  | "instagram"
+  | "x"
+  | "medium"
+  | "techCrunch"
+  | "theGuardian"
+  | "europeanParliament"
+  | "nyTimes"
+  | "googleDailyMix";
 
 interface SourceSelectorProps {
   onSelect: (type: Source, text: string, userCountry: any) => void;
@@ -13,13 +21,19 @@ interface SourceSelectorProps {
   disabled?: boolean;
 }
 
-export const SourceSelector: FC<SourceSelectorProps> = ({ type = "instagram", userInput, onSelect, onRemove, disabled }) => {
+export const SourceSelector: FC<SourceSelectorProps> = ({
+  type = "instagram",
+  userInput,
+  onSelect,
+  onRemove,
+  disabled,
+}) => {
   const [openModal, setOpenModal] = useState(false);
   const [isDisabled, setIsDisabled] = useState(disabled);
-  const [userCountry, setUserCountry] = useState('');
+  const [userCountry, setUserCountry] = useState("");
 
   const clickHandler = async () => {
-    if(isDisabled) return;
+    if (isDisabled) return;
     setOpenModal(true);
 
     const country = await getUserApi();
@@ -38,7 +52,7 @@ export const SourceSelector: FC<SourceSelectorProps> = ({ type = "instagram", us
       type={type!}
       userInput={userInput}
       isSelected={!!userInput}
-      onClick={userInput ? () => {} : clickHandler }
+      onClick={userInput ? () => {} : clickHandler}
       onRemove={userInput ? onRemove : undefined}
     />
   );
@@ -46,7 +60,13 @@ export const SourceSelector: FC<SourceSelectorProps> = ({ type = "instagram", us
   return (
     <>
       {source}
-      {openModal && <RssConfirmationModal type={type} handleClose={selectHandler} />}
+      {openModal && (
+        <RssConfirmationModal
+          type={type}
+          handleSelect={selectHandler}
+          handleClose={() => setOpenModal(false)}
+        />
+      )}
     </>
   );
 };

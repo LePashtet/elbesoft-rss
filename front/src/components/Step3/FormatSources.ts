@@ -1,6 +1,8 @@
-import { NEWS_RSS } from "../../util/NewsTopic";
+import { NEWS_RSS } from "../../utils/NewsTopic";
 
-export const FormatSources = (sources: { type: string; userInput: string }[]) => {
+export const FormatSources = (
+  sources: { type: string; userInput: string }[],
+) => {
   return sources.map((source) => {
     switch (source.type) {
       case "instagram":

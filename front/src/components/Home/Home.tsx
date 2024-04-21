@@ -1,6 +1,6 @@
 import { useState, useEffect, useCallback } from "react";
 import { Button } from "../ui/Button";
-import { getNewsletters, deleteNewsletter } from "../../api/newslettersApi";
+import { getNewsletters, deleteNewsletter } from "../../api/newsletter.ts";
 import "./Home.scss";
 
 interface NewsletterSource {
@@ -15,7 +15,7 @@ interface NewsletterSource {
 export const Home = () => {
   const [newsletters, setNewsletters] = useState<NewsletterSource[]>([]);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(false); 
+  const [error, setError] = useState(false);
 
   useEffect(() => {
     getNewsletters()
@@ -23,43 +23,42 @@ export const Home = () => {
         if (fetchedNewsletters) {
           setNewsletters(fetchedNewsletters);
         } else {
-          setError(true); 
+          setError(true);
         }
       })
       .catch((err) => {
         console.error("Error getting newsletters", err);
-        setError(true); 
+        setError(true);
       })
       .finally(() => {
-        setLoading(false); 
+        setLoading(false);
       });
   }, []);
-  
 
-  const removeNewsletter = async (_id: string) => {    
+  const removeNewsletter = async (_id: string) => {
     const success = await deleteNewsletter(_id);
     if (success) {
       setNewsletters(newsletters.filter((newsletter) => newsletter.id !== _id));
     }
-};
+  };
 
-const renderNewsletters = useCallback(() => {
-  return (
-    newsletters.map((newsletter) => (
+  const renderNewsletters = useCallback(() => {
+    return newsletters.map((newsletter) => (
       <div className="home-newsletter" key={newsletter.id}>
         <h2 className="home-newsletter-title">{newsletter.sources}</h2>
         <p className="home-newsletter-time">{newsletter.time}</p>
-        <Button onClick={() => removeNewsletter(newsletter.id)} label="Remove" />
+        <Button
+          onClick={() => removeNewsletter(newsletter.id)}
+          label="Remove"
+        />
       </div>
-    ))
-  );
-}, [newsletters]);
-
+    ));
+  }, [newsletters]);
 
   return (
     <div className="home">
       <div className="home-newsletters">
-      {loading ? (
+        {loading ? (
           <p>Loading...</p>
         ) : error ? (
           <p>Error loading newsletters.</p>
