@@ -1,7 +1,7 @@
 import { FC } from "react";
 import { Autocomplete } from "@mui/material";
-import { TextField } from '@mui/material';
-import { NEWS_TOPIC } from "../../../util/NewsTopic";
+import { TextField } from "@mui/material";
+import { NEWS_TOPIC } from "../../../utils/NewsTopic";
 
 interface CustomAutocomleteProps {
   value: string;
@@ -10,28 +10,32 @@ interface CustomAutocomleteProps {
 }
 const formatOptionLabel = (option: string) => {
   return option
-    .split(' ')
-    .map(word => word.charAt(0).toUpperCase() + word.slice(1))
-    .join(' ')
-    .replace(/([A-Z])/g, ' $1')
+    .split(" ")
+    .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+    .join(" ")
+    .replace(/([A-Z])/g, " $1")
     .trim();
 };
 
-export const CustomAutocomplete: FC<CustomAutocomleteProps> = ({ value, onChange, type }) => {
+export const CustomAutocomplete: FC<CustomAutocomleteProps> = ({
+  value,
+  onChange,
+  type,
+}) => {
   const { techCrunch, theGuardian, europeanParliament, nyTimes } = NEWS_TOPIC;
   let optionsArray: string[] = [];
 
   switch (type) {
-    case 'techCrunch':
+    case "techCrunch":
       optionsArray = techCrunch;
       break;
-    case 'theGuardian':
+    case "theGuardian":
       optionsArray = theGuardian;
       break;
-    case 'europeanParliament':
+    case "europeanParliament":
       optionsArray = europeanParliament;
       break;
-    case 'nyTimes':
+    case "nyTimes":
       optionsArray = nyTimes;
       break;
     default:
@@ -39,7 +43,10 @@ export const CustomAutocomplete: FC<CustomAutocomleteProps> = ({ value, onChange
       break;
   }
 
-  const handleAutocompleteChange = (_event: React.SyntheticEvent<Element, Event>, newValue: string | null) => {
+  const handleAutocompleteChange = (
+    _event: React.SyntheticEvent<Element, Event>,
+    newValue: string | null,
+  ) => {
     if (newValue !== null) {
       onChange(newValue);
     }
@@ -52,35 +59,41 @@ export const CustomAutocomplete: FC<CustomAutocomleteProps> = ({ value, onChange
       id="clear-on-escape"
       clearOnEscape
       sx={{
-        width: '400px',
-        '.MuiAutocomplete-input': { 
-          fontFamily: 'Montserrat',
-          fontSize: '18px',
-          lineHeight: '28.5px',
+        width: "400px",
+        ".MuiAutocomplete-input": {
+          fontFamily: "Montserrat",
+          fontSize: "18px",
+          lineHeight: "28.5px",
           fontWeight: 400,
         },
       }}
       ListboxProps={{
         sx: {
-          '.MuiAutocomplete-option': {
-            fontFamily: 'Montserrat',
-            fontSize: '18px',
-            lineHeight: '28.5px',
+          ".MuiAutocomplete-option": {
+            fontFamily: "Montserrat",
+            fontSize: "18px",
+            lineHeight: "28.5px",
             fontWeight: 400,
           },
         },
       }}
       onChange={handleAutocompleteChange}
       renderInput={(params) => (
-        <TextField {...params} label="Topic of news" variant="standard" value={value}  sx={{ 
-          '& .MuiInputLabel-root': {
-            fontFamily: 'Montserrat',
-            fontSize: '18px',
-            lineHeight: '28.5px',
-            fontWeight: 400,
-          },
-        }} />
+        <TextField
+          {...params}
+          label="Topic of news"
+          variant="standard"
+          value={value}
+          sx={{
+            "& .MuiInputLabel-root": {
+              fontFamily: "Montserrat",
+              fontSize: "18px",
+              lineHeight: "28.5px",
+              fontWeight: 400,
+            },
+          }}
+        />
       )}
     />
-  )
-}
+  );
+};

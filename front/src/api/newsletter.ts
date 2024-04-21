@@ -9,7 +9,6 @@ interface Newsletter {
   createdAt: string;
 }
 
-
 interface Source {
   link: string;
   keywords: string[];
@@ -45,13 +44,12 @@ export const deleteNewsletter = (id: string): Promise<boolean> => {
     });
 };
 
-
 export const getNewsletters = (): Promise<Newsletter[] | undefined> => {
   return axios
     .get("http://localhost:3001/api/v1/newsletter")
     .then((response) => {
       const fetchedNewsletters: Newsletter[] = response.data.newsletter;
-      
+
       return fetchedNewsletters;
     })
     .catch((error) => {

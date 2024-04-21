@@ -1,5 +1,5 @@
-import { FC, ChangeEvent, useState } from 'react';
-import { OutlinedInput } from '@mui/material';
+import { FC, ChangeEvent, useState } from "react";
+import { OutlinedInput } from "@mui/material";
 
 interface InputProps {
   value: string;
@@ -9,7 +9,7 @@ interface InputProps {
   type?: string;
   valid?: boolean;
   onValidChange?: (isValid: boolean) => void;
-  visited?: boolean; 
+  visited?: boolean;
 }
 
 export const Input: FC<InputProps> = ({
@@ -20,7 +20,7 @@ export const Input: FC<InputProps> = ({
   type,
   valid,
   onValidChange,
-  visited, 
+  visited,
 }) => {
   const [isValid, setIsValid] = useState(valid || false);
 
@@ -47,20 +47,22 @@ export const Input: FC<InputProps> = ({
         type={type}
         onBlur={handleBlur}
         sx={{
-          '& input': {
-            fontFamily: 'Montserrat',
-            fontSize: '18px',
-            lineHeight: '28.5px',
+          "& input": {
+            fontFamily: "Montserrat",
+            fontSize: "18px",
+            lineHeight: "28.5px",
             fontWeight: 400,
           },
-          width: '400px',
-          height: '60px',
+          width: "400px",
+          height: "60px",
         }}
         value={value}
         onChange={onChange}
       />
       {visited && !isValid && (
-        <p style={{color:'red',textAlign:'center'}}>Invalid email address</p>
+        <p style={{ color: "red", textAlign: "center" }}>
+          Invalid email address
+        </p>
       )}
     </div>
   );
