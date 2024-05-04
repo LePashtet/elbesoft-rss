@@ -7,6 +7,9 @@ const envVarsSchema = Joi.object()
     PORT: Joi.number().default(3000),
     MONGODB_URL: Joi.string().required().description('Mongo DB url'),
     LOG_LEVEL: Joi.string().valid('error', 'warn', 'info', 'debug').default('info'),
+    GOOGLE_CLIENT_ID: Joi.string().required().description('Google Auth credentials'),
+    GOOGLE_CLIENT_SECRET: Joi.string().required().description('Google Auth credentials'),
+    GOOGLE_CALLBACK_URL: Joi.string().required().description('Google Auth credentials'),
   })
   .unknown();
 
@@ -28,6 +31,9 @@ function createConfig(configPath) {
       url: envVars.MONGODB_URL,
     },
     logLevel: envVars.LOG_LEVEL,
+    googleClientId: envVars.GOOGLE_CLIENT_ID,
+    googleClientSecret: envVars.GOOGLE_CLIENT_SECRET,
+    googleCallbackUrl: envVars.GOOGLE_CALLBACK_URL,
   };
 }
 

@@ -1,7 +1,8 @@
-import axios from "axios";
-export const makeHttpRequest = async ({
-                                          ...args
-                                      }) => {
+const axios = require("axios");
+
+const makeHttpRequest = async ({
+                                   ...args
+                               }) => {
     try {
         const response = await axios(args);
         return response;
@@ -19,3 +20,5 @@ export const makeHttpRequest = async ({
         }
     }
 };
+
+module.exports = makeHttpRequest
