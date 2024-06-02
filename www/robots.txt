@@ -1,0 +1,5 @@
+user-agent: *
+Allow: /$
+Disallow: /
+
+Sitemap: https://newsletter.happymvp.com/sitemap.xml
