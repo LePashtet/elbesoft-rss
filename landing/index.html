@@ -10,6 +10,10 @@
             href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Roboto:wght@400;500&display=swap"
             rel="stylesheet"
     />
+    <link
+            rel="stylesheet"
+            href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"
+    />
     <link rel="stylesheet" href="style.css"/>
     <title>Create personal feed and prevent doom scrolling! | News + Letter</title>
     <meta
@@ -43,12 +47,12 @@
 <body>
 <header id="header">
     <a href="#home">News+Letter</a>
-    <nav role="main">
+    <nav class="header-nav" role="main">
         <ul class="header-links">
-            <li><a class="header-link" href="#features">Who is it for?</a></li>
-            <li><a class="header-link" href="#about">How it works?</a></li>
-            <li><a class="header-link" href="#price">Pricing</a></li>
-            <li><a class="header-link" href="#faq">FAQ</a></li>
+            <li><a class="header-link header-link_features_mobile" >Who is it for?</a></li>
+            <li><a class="header-link header-link_about_mobile" >How it works?</a></li>
+            <li><a class="header-link header-link_price_mobile" >Pricing</a></li>
+            <li><a class="header-link header-link_faq_mobile" >FAQ</a></li>
             <li>
                 <a href="/app/auth" class="header-button">
                     <div>
@@ -80,16 +84,16 @@
             </div>
             <ul class="menu-items-wrapper">
                 <li class="header-link-wrapper">
-                    <a class="header-link" href="#features">Who is it for?</a>
+                    <a class="header-link header-link_features">Who is it for?</a>
                 </li>
                 <li class="header-link-wrapper">
-                    <a class="header-link" href="#about">How it works?</a>
+                    <a class="header-link header-link_about" >How it works?</a>
                 </li>
                 <li class="header-link-wrapper">
-                    <a class="header-link" href="#price">Pricing</a>
+                    <a class="header-link header-link_price">Pricing</a>
                 </li>
                 <li class="header-link-wrapper">
-                    <a class="header-link" href="#faq">FAQ</a>
+                    <a class="header-link header-link_faq">FAQ</a>
                 </li>
                 <li class="header-link-wrapper">
                     <a href="/app/auth" class="header-button">Log in</a>
@@ -200,38 +204,44 @@
     </section>
     <section id="about">
         <h2 class="about-title">How it works?</h2>
-        <div class="slider">
+        <div id="slider" class="slider">
             <div class="slide slide-1">
                 <div class="slide-info slide-info-1">
                     <h3 class="slide-title slide-title-1">Select a source</h3>
-                    <p class="slide-text">
+                    <p class="slide-text slide-text-1">
                         Could be page in Instagram, Facebook, Twitter or the RSS.
                     </p>
                 </div>
-                <img class="slide-img-1" src="assets/image1.png" alt="Slide 1"/>
+                <div class="slide-img-wrapper">
+                <img class="slide-img slide-img-1" src="assets/image1.png" alt="Slide 1"/>
+                </div>
             </div>
             <div class="slide slide-2">
-                <img class="slide-img-2" src="assets/image2.png" alt="Slide 2"/>
                 <div class="slide-info slide-info-2">
                     <h3 class="slide-title slide-title-2">Pick time</h3>
                     <p class="slide-text">
                         Choose the time you want to receive all the news
                     </p>
                 </div>
+                <div class="slide-img-wrapper">
+                <!-- <img class="slide-img slide-img-2" src="assets/image1.png" alt="Slide 2"/> -->
+                    <img class="slide-img-second slide-img-second_2" src="assets/image2.png" />
+            </div>
             </div>
             <div class="slide slide-3">
                 <div class="slide-info slide-info-3">
                     <h3 class="slide-title slide-title-3">Pick location</h3>
-                    <p class="slide-text">
+                    <p class="slide-text ">
                         Select the place you want to receive the summary: via email,
                         Telegram bot, or own RSS feed.
                     </p>
                 </div>
-                <img class="slide-img-3" src="assets/image3.png" alt="Slide 3"/>
+                <div class="slide-img-wrapper">
+                <!-- <img class="slide-img slide-img-3" src="assets/image1.png" alt="Slide 3"/> -->
+                <img class="slide-img-second slide-img-second_3" src="assets/image3.png" />
+                </div>
             </div>
             <div class="slide slide-4">
-                <img class="slide-img-4" src="assets/image4.png" alt="Slide 4"/>
-
                 <div class="slide-info slide-info-4">
                     <h3 class="slide-title slide-title-4">Ready!</h3>
                     <p class="slide-text">
@@ -239,19 +249,23 @@
                         advertisements and mindless scrolling.
                     </p>
                 </div>
+                <div class="slide-img-wrapper">
+                <!-- <img class="slide-img slide-img-4" src="assets/image1.png" alt="Slide 4"/> -->
+                <img class="slide-img-second slide-img-second_4" src="assets/image4.png" />
+                </div>
             </div>
         </div>
+        
     </section>
     <section id="price">
         <div class="reviews">
             <div class="reviews-container">
                 <div class="label-container">
                     <h2>Why people <span>use News+Letter</span></h2>
-                    <button class="reviews-arrow-left">&larr;</button>
-                    <button class="reviews-arrow-right">&rarr;</button>
                 </div>
-                <div class="card-slider">
-                    <div class="reviews-card reviews-card-last">
+                <div class="card-slider swiper-container">
+                    <div class="swiper-wrapper">
+                    <div class="reviews-card-last reviews-card swiper-slide">
                         <div class="reviews-container">
                             <p class="reviews-text">
                                 Very promising startup! Looking forward for full version!
@@ -259,7 +273,7 @@
                             <p class="reviews-author">Paul</p>
                         </div>
                     </div>
-                    <div class="reviews-card">
+                    <div class="reviews-card swiper-slide">
                         <div class="reviews-container">
                             <p class="reviews-text">
                                 As someone with a hectic schedule, News+Letter saves me so much time. Getting all my
@@ -268,7 +282,7 @@
                             <p class="reviews-author">Nadia</p>
                         </div>
                     </div>
-                    <div class="reviews-card">
+                    <div class="reviews-card swiper-slide">
                         <div class="reviews-container">
                             <p class="reviews-text">
                                 love how I can tailor my feed to include only the sources I trust. It’s like having a
@@ -277,7 +291,7 @@
                             <p class="reviews-author">Karl</p>
                         </div>
                     </div>
-                    <div class="reviews-card">
+                    <div class="reviews-card swiper-slide">
                         <div class="reviews-container">
                             <p class="reviews-text">
                                 The interface is intuitive and user-friendly. Setting up was a breeze, and now I can’t
@@ -286,7 +300,7 @@
                             <p class="reviews-author">Lucie</p>
                         </div>
                     </div>
-                    <div class="reviews-card">
+                    <div class="reviews-card swiper-slide">
                         <div class="reviews-container">
                             <p class="reviews-text">
                                 The one-month free trial was a great way to test out the service, and I was hooked
@@ -295,7 +309,7 @@
                             <p class="reviews-author">George</p>
                         </div>
                     </div>
-                    <div class="reviews-card">
+                    <div class="reviews-card swiper-slide">
                         <div class="reviews-container">
                             <p class="reviews-text">
                                 News+Letter has transformed my daily news consumption. I no longer have to scroll
@@ -305,6 +319,8 @@
                             <p class="reviews-author">Petra</p>
                         </div>
                     </div>
+                </div>
+                <div class="swiper-pagination"></div>
                 </div>
             </div>
         </div>
@@ -410,6 +426,8 @@
         <img src="assets/arrow-top-button.svg" alt="Button to go to top"/>
     </button>
 </footer>
+<script src="https://cdn.jsdelivr.net/npm/animejs@3.0.1/lib/anime.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/2.0.2/TweenMax.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.6/ScrollMagic.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.6/plugins/animation.gsap.js"></script>
