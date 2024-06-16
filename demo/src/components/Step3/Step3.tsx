@@ -1,6 +1,6 @@
 import { useState, ChangeEvent } from "react";
 import { useNavigate } from "react-router-dom";
-import { Button } from "../ui/Button";
+import { Button } from "../ui/Button/Button.tsx";
 import { Chip } from "../ui/Chip/Chip";
 import { FormatSources } from "./FormatSources";
 import { Input } from "../ui/Input";

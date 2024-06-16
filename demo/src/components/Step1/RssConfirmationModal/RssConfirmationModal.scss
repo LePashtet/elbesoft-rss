@@ -17,14 +17,20 @@
     overflow: hidden;
     background-color: #fff;
     border-radius: 8px;
-    border: 1px solid #DAE2ED;
+    border: 1px solid #dae2ed;
     box-shadow: 0 4px 12px rgb(0 0 0 / 0.2);
     padding: 24px;
-    color: #1C2025;
+    color: #1c2025;
+    @media (max-width: 767px) {
+      width: 60% !important;
+    }
+    @media (max-width: 480px) {
+      width: 80% !important;
+    }
     & .modal-title {
       line-height: 1.5rem;
       margin: 0 0 8px;
-      font-family: 'Montserrat';
+      font-family: "Montserrat";
       font-size: 18px;
       line-height: 28px;
       font-weight: 400;
@@ -34,16 +40,15 @@
 
     & .modal-action {
       margin: 20px 0 4px 0;
-
-     button {
-       margin-right: 10px;
-     }
+      button {
+        margin-right: 10px;
+      }
     }
   }
-  &-error{
-    color:red;
-    margin:10px 0 0 0;
-    font-family: 'Montserrat';
+  &-error {
+    color: red;
+    margin: 10px 0 0 0;
+    font-family: "Montserrat";
     font-size: 12px;
     line-height: 14.5px;
     font-weight: 400;

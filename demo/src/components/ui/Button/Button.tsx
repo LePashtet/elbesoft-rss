@@ -1,39 +1,34 @@
 import { FC, MouseEventHandler } from "react";
 import Btn from "@mui/material/Button";
+import clsx from "clsx";
+import "./Button.scss";
 
 interface ButtonProps {
   label: string;
   onClick: MouseEventHandler;
   disabled?: boolean;
+  style?: "green" | "transparent" | "";
+  className?: string;
 }
+
+const buttonStyles = {
+  green: "green",
+  transparent: "transparent",
+};
 
 export const Button: FC<ButtonProps> = ({
   label,
   onClick,
   disabled = false,
+  style,
+  className,
 }) => (
   <Btn
     variant="outlined"
     size="medium"
     onClick={onClick}
     disabled={disabled}
-    sx={{
-      backgroundColor: "#0000000A",
-      border: "none",
-      borderRadius: "4px",
-      color: "#000000",
-      fontSize: "14px",
-      lineHeight: "36px",
-      letterSpacing: "1.25px",
-      fontFamily: "Roboto",
-      fontWeight: "500",
-      height: "30px",
-      padding: "0px 16px",
-
-      "&:hover": {
-        border: "1px solid black",
-      },
-    }}
+    className={clsx("button", style && buttonStyles[style], className)}
   >
     {label}
   </Btn>

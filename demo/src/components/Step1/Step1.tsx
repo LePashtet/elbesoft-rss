@@ -1,90 +1,78 @@
-import { Button } from "../ui/Button";
-import { useNavigate } from "react-router-dom";
-import { Source, SourceSelector } from "../SourceSelector/SourceSelector.tsx";
-import { useState, FC } from "react";
-import { useSourceContext } from "../../store/Context.tsx";
+import { FC } from "react";
+import clsx from "clsx";
+import { Button } from "../ui/Button/Button";
+import { SourceSelector } from "../SourceSelector/SourceSelector";
+import { Input } from "../ui/Input";
+import { useStep1 } from "./useStep1";
 import "./Step1.scss";
 
-const sourceSelectors: Source[] = [
-  "instagram",
-  "x",
-  "medium",
-  "techCrunch",
-  "theGuardian",
-  "europeanParliament",
-  "nyTimes",
-  "googleDailyMix",
-];
-
 export const Step1: FC = () => {
-  const navigator = useNavigate();
-  const { updateData } = useSourceContext();
+  const {
+    sources,
+    counter,
+    searchQuery,
+    filteredSources,
+    noSourcesMessage,
+    handleButtonClick,
+    addActiveSource,
+    removeActiveSource,
+    handleSearchChange,
+  } = useStep1();
 
-  const [sources, setSources] = useState<
-    Array<{ type: Source; userInput: string }>
-  >([]);
-  const [counter, setCounter] = useState(0);
-  const [userCountry, setUserCountry] = useState("");
-
-  const handleButtonClick = () => {
-    navigator("/app/setup/time", { state: { sources, userCountry } });
-    updateData(sources, userCountry);
-  };
-  const addActiveSource = (
-    type: Source,
-    userInput: string,
-    userCountry?: any,
-  ) => {
-    if (counter < 5) {
-      setSources([...sources, { type, userInput }]);
-      setCounter(counter + 1);
-      setUserCountry(userCountry);
-    }
-  };
-
-  const removeActiveSource = (type: Source, userInput: string) => {
-    const updatedSources = sources.filter(
-      (item) => !(item.type === type && item.userInput === userInput),
-    );
-    setSources(updatedSources);
-    setCounter(updatedSources.length);
-  };
+  const limit = 5;
 
   return (
     <div className="step1">
       <h1 className="step1-title">Select Sources</h1>
-      <div className="step1-chips">
-        {sourceSelectors.map((item) => [
-          <SourceSelector
-            key={item}
-            type={item}
-            onSelect={addActiveSource}
-            disabled={counter >= 5}
-            onRemove={() => {}}
-          />,
-        ])}
-        {sources.map((item) => (
-          <SourceSelector
-            key={`${item.type}-${item.userInput}`}
-            type={item.type}
-            userInput={item.userInput}
-            onSelect={() => {}}
-            onRemove={() => removeActiveSource(item.type, item.userInput)}
-          />
-        ))}
+      <Input
+        type="text"
+        value={searchQuery}
+        onChange={handleSearchChange}
+        placeholder="Search sources..."
+        className="search-input"
+      />
+      <span className="step1-count">
+        {counter}/{limit}
+      </span>
+      <div className="step1-chips-wrapper">
+        <div
+          className={clsx(
+            "step1-chips",
+            noSourcesMessage && "step1-no-sources"
+          )}
+        >
+          {!noSourcesMessage &&
+            sources.map((item) => (
+              <SourceSelector
+                key={`${item.type}-${item.userInput}`}
+                type={item.type}
+                userInput={item.userInput}
+                onSelect={() => {}}
+                onRemove={() => removeActiveSource(item.type, item.userInput)}
+              />
+            ))}
+          {!noSourcesMessage &&
+            filteredSources.map((item) => (
+              <SourceSelector
+                key={item}
+                type={item}
+                onSelect={addActiveSource}
+                disabled={counter >= limit}
+                onRemove={() => {}}
+              />
+            ))}
+          {noSourcesMessage && (
+            <p className="no-sources-message">{noSourcesMessage}</p>
+          )}
+        </div>
       </div>
-      <span className="step1-count">{counter}/5</span>
       <Button
+        style={counter > 0 ? "green" : ""}
         onClick={handleButtonClick}
         disabled={counter < 1}
         label="ready"
+        className="ready-button"
       />
-      <a
-        className="step1-link"
-        href="mailto:hello@happymvp.com?subject=Can’t%20find%20source%3F%20Let%20us%20know!"
-      >
-        Can’t find source? Let us know: hello@happymvp.com!
-      </a>
     </div>
   );
 };

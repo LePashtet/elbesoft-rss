@@ -1,8 +1,10 @@
 import { FC } from "react";
 import ChipClick from "@mui/material/Chip";
 import Avatar from "@mui/material/Avatar";
-import ChipIcon from "./ChipIcon";
+import clsx from "clsx";
 import { Source } from "../../SourceSelector/SourceSelector";
+import ChipIcon from "./ChipIcon";
+import "./Chip.scss"; // Import the SCSS module
 
 interface ChipProps {
   label: string;
@@ -11,7 +13,13 @@ interface ChipProps {
   isSelected?: boolean;
   type?: string;
   chipType?: Source;
+  style?: "regular" | "sources";
 }
+
+const chipStyles = {
+  regular: "regular",
+  sources: "sources",
+};
 
 export const Chip: FC<ChipProps> = ({
   chipType,
@@ -20,6 +28,7 @@ export const Chip: FC<ChipProps> = ({
   isSelected,
   type = "click",
   onRemove,
+  style = "regular",
 }) => {
   const variant = isSelected ? "filled" : "outlined";
 
@@ -27,11 +36,15 @@ export const Chip: FC<ChipProps> = ({
     onRemove?.();
     onClick();
   };
+
   return (
     <ChipClick
       avatar={
         chipType ? (
-          <Avatar sx={{ backgroundColor: "transparent" }}>
+          <Avatar
+            sx={{ backgroundColor: "transparent" }}
+            className={`${style === "sources" ? "avatar" : ""} `}
+          >
             <ChipIcon chipType={chipType} />
           </Avatar>
         ) : undefined
@@ -39,27 +52,13 @@ export const Chip: FC<ChipProps> = ({
       label={label}
       variant={isSelected !== undefined ? variant : "filled"}
       onClick={handleClick}
-      sx={{
-        height: "32px",
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-        color: "#9E9E9E",
-        fontFamily: "Roboto",
-        fontWeight: 400,
-        fontSize: "14px",
-        lineHeight: "20px",
-        ...(type !== "click"
-          ? {
-              cursor: "not-allowed",
-            }
-          : {}),
-        "&:hover":
-          variant === "filled" && onRemove
-            ? {
-                border: "1px solid red",
-              }
-            : {},
+      className={clsx(
+        chipStyles[style],
+        type === "click" ? "click" : "not-click",
+        isSelected ? "filled" : ""
+      )}
+      classes={{
+        label: "label",
       }}
     />
   );

@@ -1,15 +1,17 @@
 import React, { createContext, useContext, useState, ReactNode } from "react";
 import { Source } from "../components/SourceSelector/SourceSelector";
 
+interface SourceData {
+  type: Source;
+  userInput: string;
+}
+
 interface SourceContextValue {
-  sources: Array<{ type: Source; userInput: string }>;
+  sources: Array<SourceData>;
   userCountry: string;
   time: string;
   updateTime: (time: string) => void;
-  updateData: (
-    newSources: Array<{ type: Source; userInput: string }>,
-    newUserCountry: string,
-  ) => void;
+  updateData: (newSources: Array<SourceData>, newUserCountry: string) => void;
 }
 
 const SourceContext = createContext<SourceContextValue | undefined>(undefined);
@@ -25,15 +27,13 @@ export const useSourceContext = () => {
 export const SourceProvider: React.FC<{ children: ReactNode }> = ({
   children,
 }) => {
-  const [sources, setSources] = useState<
-    Array<{ type: Source; userInput: string }>
-  >([]);
+  const [sources, setSources] = useState<Array<SourceData>>([]);
   const [userCountry, setUserCountry] = useState("");
   const [time, setTime] = useState("");
 
   const updateData = (
-    newSources: Array<{ type: Source; userInput: string }>,
-    newUserCountry: string,
+    newSources: Array<SourceData>,
+    newUserCountry: string
   ) => {
     setSources(newSources);
     setUserCountry(newUserCountry);

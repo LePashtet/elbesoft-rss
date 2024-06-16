@@ -1,6 +1,6 @@
 import { FC, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { Button } from "../ui/Button";
+import { Button } from "../ui/Button/Button.tsx";
 import { Chip } from "../ui/Chip/Chip";
 import "./Step2.scss";
 import { useSourceContext } from "../../store/Context.tsx";

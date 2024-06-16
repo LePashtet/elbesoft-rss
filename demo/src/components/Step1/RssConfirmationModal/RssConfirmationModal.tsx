@@ -4,26 +4,48 @@ import { createPortal } from "react-dom";
 import { Input } from "../../ui/Input.tsx";
 import { Backdrop } from "./Backdrop.tsx";
 import { CustomAutocomplete } from "../../ui/Autocomplete/Autocomplete.tsx";
-import { Button } from "../../ui/Button.tsx";
+import { Button } from "../../ui/Button/Button.tsx";
+import { useDevice } from "../../../hooks/useDevice.ts";
 import "./RssConfirmationModal.scss";
 
-export const RssConfirmationModal: FC<{
+interface RssConfirmationModalProps {
   handleSelect: (text: string) => void;
   handleClose: () => void;
   type?: string;
-}> = ({ handleSelect, handleClose, type }) => {
+}
+
+export const RssConfirmationModal: FC<RssConfirmationModalProps> = ({
+  handleSelect,
+  handleClose,
+  type,
+}) => {
+  const { isMobile } = useDevice();
   const [text, setText] = useState<string>("");
   const [errorVisible, setErrorVisible] = useState<boolean>(false);
 
-  const isRss =
-    type !== "x" &&
-    type !== "instagram" &&
-    type !== "medium" &&
-    type !== "googleDailyMix";
+  const excludedTypes = [
+    "x",
+    "instagram",
+    "medium",
+    "googleDailyMix",
+    "telegram",
+    "tikTok",
+    "youTube",
+    "pinterest",
+    "threads",
+    "facebook",
+    "linkedIn",
+    "reddit",
+    "dailymotion",
+    "rumble",
+  ];
+
+  const isRss = !excludedTypes.includes(type || "");
 
   const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
     setText(event.target.value);
   };
+
   const handleAutocompleteChange = (newText: string) => {
     setText(newText);
   };
@@ -36,6 +58,41 @@ export const RssConfirmationModal: FC<{
     }
   };
 
+  const renderTitle = () => {
+    if (isRss) return "Pick a topic of news";
+    if (type === "googleDailyMix") return "Enter a topic of news";
+    return "Enter a username";
+  };
+
+  const renderInput = () => {
+    if (isRss) {
+      return (
+        <CustomAutocomplete
+          type={type || ""}
+          onChange={handleAutocompleteChange}
+          value={text}
+          width={isMobile ? "100%" : "400px"}
+        />
+      );
+    }
+    return (
+      <Input
+        width={isMobile ? "100%" : "400px"}
+        onChange={handleInputChange}
+        value={text}
+      />
+    );
+  };
+
+  const renderError = () => {
+    if (!errorVisible) return null;
+    return (
+      <p className="modal-error">
+        {isRss ? "Please enter a topic of news" : "Please enter username"}
+      </p>
+    );
+  };
+
   return createPortal(
     <ModalMui
       aria-labelledby="unstyled-modal-title"
@@ -46,35 +103,16 @@ export const RssConfirmationModal: FC<{
     >
       <div className="modal-content">
         <h2 id="unstyled-modal-title" className="modal-title">
-          {isRss
-            ? "Pick a topic of news"
-            : type === "googleDailyMix"
-              ? "Enter a topic of news"
-              : "Enter a username"}
+          {renderTitle()}
         </h2>
-
-        {isRss ? (
-          <CustomAutocomplete
-            type={type ? type : ""}
-            onChange={handleAutocompleteChange}
-            value={text}
-          />
-        ) : (
-          <Input onChange={handleInputChange} value={text} />
-        )}
-        {errorVisible ? (
-          <p className="modal-error">
-            {isRss ? "Please enter a topic of news" : "Please enter username"}
-          </p>
-        ) : (
-          ""
-        )}
+        {renderInput()}
+        {renderError()}
         <div id="unstyled-modal-description" className="modal-action">
-          <Button label="Select" onClick={handleSelectModal} />
-          <Button label="Close" onClick={handleClose} />
+          <Button style="green" label="Select" onClick={handleSelectModal} />
+          <Button style="transparent" label="Close" onClick={handleClose} />
         </div>
       </div>
     </ModalMui>,
-    document.body,
+    document.body
   );
 };

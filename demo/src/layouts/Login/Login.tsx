@@ -1,8 +1,22 @@
+import { ChangeEvent, FC, useState } from "react";
 import { ChipIcon } from "../../components/ui/ChipIcon";
-import "./Login.scss";
+import { useDevice } from "../../hooks/useDevice.ts";
 import { Input } from "../../components/ui/Input.tsx";
-import { Button } from "../../components/ui/Button.tsx";
-export const Login = () => {
+import { Button } from "../../components/ui/Button/Button.tsx";
+
+import "./Login.scss";
+export const Login: FC = () => {
+  const [email, setEmail] = useState<string>("");
+  const [passowrd, setPassowrd] = useState<string>("");
+
+  const handleInputEmailChange = (event: ChangeEvent<HTMLInputElement>) => {
+    setEmail(event.target.value);
+  };
+  const handleInputPasswordChange = (event: ChangeEvent<HTMLInputElement>) => {
+    setPassowrd(event.target.value);
+  };
+
+  const { isMobile } = useDevice();
   return (
     <main className="login">
       <div className="login-block">
@@ -11,8 +25,19 @@ export const Login = () => {
           <a href="/">News + Letter</a>
         </h1>
         <div className="login-block_form">
-          <Input value="" onChange={() => {}} placeholder="Email" />
-          <Input value="" onChange={() => {}} placeholder="Password" />
+          <Input
+            width={isMobile ? "100%" : "400px"}
+            value={email}
+            onChange={handleInputEmailChange}
+            placeholder="Email"
+          />
+          <Input
+            width={isMobile ? "100%" : "400px"}
+            value={passowrd}
+            onChange={handleInputPasswordChange}
+            placeholder="Password"
+            type="password"
+          />
           <Button label="Log in" onClick={() => {}} />
         </div>
         <div className="login-block_chips">

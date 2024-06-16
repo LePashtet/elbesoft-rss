@@ -313,8 +313,10 @@ function test() {
 
   document.querySelectorAll(".slide").forEach((slide, index) => {
     const length = document.querySelectorAll(".slide").length;
+
     const info = slide.querySelector(".slide-info");
     const img = slide.querySelector(".slide-img-second");
+
     tl.add({
       targets: info,
       opacity: [index == 0 ? 1.5 : 0, 1],
@@ -329,6 +331,11 @@ function test() {
       duration: 5000,
       easing: "easeInOutSine",
       offset: index * 2000 + 1000,
+      complete: function (anim) {
+        if (anim.progress === 100) {
+          stopScroll();
+        }
+      },
     });
     tl2
       .add({
@@ -344,6 +351,11 @@ function test() {
         duration: 5000,
         easing: "easeInOutSine",
         offset: index * 2000 + 1000,
+        complete: function (anim) {
+          if (anim.progress === 100) {
+            stopScroll();
+          }
+        },
       });
   });
 
