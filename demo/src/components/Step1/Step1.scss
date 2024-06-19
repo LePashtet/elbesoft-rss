@@ -98,15 +98,11 @@
 
 .ready-button {
   margin-top: 10px !important;
-  width: 130px !important;
-  height: 50px !important;
   @media (max-width: 1024px) {
     margin-bottom: 10px !important;
   }
   @media (max-width: 480px) {
     position: absolute !important;
-    width: 110px !important;
-    height: 45px !important;
     bottom: 10px;
   }
 }

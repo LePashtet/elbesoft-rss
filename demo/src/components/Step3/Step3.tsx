@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { Button } from "../ui/Button/Button.tsx";
 import { Chip } from "../ui/Chip/Chip";
 import { FormatSources } from "./FormatSources";
-import { Input } from "../ui/Input";
+import { Input } from "../ui/Input/Input.tsx";
 import "./Step3.scss";
 import { useSourceContext } from "../../store/Context.tsx";
 import { sendLead } from "../../api/hubspot.ts";
@@ -52,21 +52,25 @@ export const Step3 = () => {
           onClick={() => handleChipClick("Email")}
           label="Email"
           isSelected={isEmailClicked}
+          className="step3-chips_chip"
         />
         <Chip
           onClick={() => handleChipClick("Telegram Bot")}
           type="disable"
           label="Telegram Bot"
+          className="step3-chips_chip"
         />
         <Chip
           onClick={() => handleChipClick("RSS")}
           type="disable"
           label="RSS"
+          className="step3-chips_chip"
         />
         <Chip
           onClick={() => handleChipClick("Pigeon Mail")}
           type="disable"
           label="Pigeon Mail"
+          className="step3-chips_chip"
         />
       </div>
       {isEmailClicked && (
@@ -79,13 +83,17 @@ export const Step3 = () => {
             type="email"
             onValidChange={(isValid: boolean) => setIsEmailValid(isValid)}
             visited={isEmailInputVisited}
+            className="step3-input"
           />
         </div>
       )}
       <Button
         onClick={handleButtonClick}
+        style={isEmailValid ? "green" : "regular"}
         disabled={!isEmailValid}
         label="Start the magic!"
+        size="large"
+        className="step3-button"
       />
     </div>
   );

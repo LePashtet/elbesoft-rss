@@ -2,6 +2,7 @@ import { FC, useState } from "react";
 import { RssConfirmationModal } from "../Step1/RssConfirmationModal/RssConfirmationModal.tsx";
 import { getUserApi } from "../../api/getUserApi.ts";
 import { SourceChip } from "./SourceChip.tsx";
+import { useSourceContext } from "../../store/Context.tsx";
 
 export type Source =
   | "instagram"
@@ -53,6 +54,7 @@ export const SourceSelector: FC<SourceSelectorProps> = ({
 
   const clickHandler = async () => {
     if (disabled) return;
+    // setIsDuplicate(false);
     setOpenModal(true);
 
     const country = await getUserApi();

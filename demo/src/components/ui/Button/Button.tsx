@@ -7,28 +7,35 @@ interface ButtonProps {
   label: string;
   onClick: MouseEventHandler;
   disabled?: boolean;
-  style?: "green" | "transparent" | "";
+  style?: "green" | "transparent" | "regular";
+  size?: "large" | "regular";
   className?: string;
 }
 
 const buttonStyles = {
   green: "green",
   transparent: "transparent",
+  regular: "",
+};
+const buttonSize = {
+  large: "large",
+  regular: "fit-content",
 };
 
 export const Button: FC<ButtonProps> = ({
   label,
   onClick,
   disabled = false,
-  style,
+  style = "regular",
   className,
+  size = "regular",
 }) => (
   <Btn
     variant="outlined"
     size="medium"
     onClick={onClick}
     disabled={disabled}
-    className={clsx("button", style && buttonStyles[style], className)}
+    className={clsx("button", buttonStyles[style], className, buttonSize[size])}
   >
     {label}
   </Btn>

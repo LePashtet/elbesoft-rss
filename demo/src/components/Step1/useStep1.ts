@@ -13,21 +13,21 @@ const sourceSelectors: Source[] = [
   "telegram",
   "tikTok",
   "facebook",
+  "reddit",
+  "pinterest",
+  "dailymotion",
+  "rumble",
   "techCrunch",
   "theGuardian",
   "europeanParliament",
   "nyTimes",
   "googleDailyMix",
-  "reddit",
   "craigslist",
   "newsweek",
   "cointelegraph",
   "vimeo",
-  "pinterest",
-  "dailymotion",
   "foxnews",
   "coindesk",
-  "rumble",
   "cnn",
   "time",
   "vox",
@@ -36,9 +36,8 @@ const sourceSelectors: Source[] = [
 
 export const useStep1 = () => {
   const navigate = useNavigate();
-  const { updateData } = useSourceContext();
-
-  const [sources, setSources] = useState<
+  const { sources, updateCountry, setSources } = useSourceContext();
+  const [unfinishedSources, setUnfinishedSources] = useState<
     Array<{ type: Source; userInput: string }>
   >([]);
   const [counter, setCounter] = useState(0);
@@ -46,30 +45,32 @@ export const useStep1 = () => {
   const [searchQuery, setSearchQuery] = useState("");
 
   const handleButtonClick = () => {
-    navigate("/app/setup/time", { state: { sources, userCountry } });
-    updateData(sources, userCountry);
+    navigate("/app/setup/time", { state: { unfinishedSources, userCountry } });
+    updateCountry(userCountry);
   };
 
   const addActiveSource = (type: Source, userInput: string) => {
-    const isDuplicate = sources.some(
+    const duplicate = unfinishedSources.some(
       (source) => source.type === type && source.userInput === userInput
     );
-    if (isDuplicate) {
-      alert("This source already exists!");
-      return;
-    }
-
-    if (counter < 5) {
+    if (!duplicate && counter < 5) {
+      setUnfinishedSources([...unfinishedSources, { type, userInput }]);
       setSources([...sources, { type, userInput }]);
       setCounter(counter + 1);
     }
   };
+
   const removeActiveSource = (type: Source, userInput: string) => {
-    const updatedSources = sources.filter(
+    const updatedSources = unfinishedSources.filter(
       (item) => !(item.type === type && item.userInput === userInput)
     );
-    setSources(updatedSources);
+    setUnfinishedSources(updatedSources);
     setCounter(updatedSources.length);
+
+    const updatedIsDuplicate = sources.filter(
+      (item) => !(item.type === type && item.userInput === userInput)
+    );
+    setSources(updatedIsDuplicate);
   };
 
   const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -88,8 +89,6 @@ export const useStep1 = () => {
     filteredSources.length === 0 ? "No sources found" : "";
 
   return {
-    sources,
-    counter,
     searchQuery,
     filteredSources,
     noSourcesMessage,

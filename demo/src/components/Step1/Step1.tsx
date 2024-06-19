@@ -2,14 +2,13 @@ import { FC } from "react";
 import clsx from "clsx";
 import { Button } from "../ui/Button/Button";
 import { SourceSelector } from "../SourceSelector/SourceSelector";
-import { Input } from "../ui/Input";
+import { Input } from "../ui/Input/Input";
 import { useStep1 } from "./useStep1";
 import "./Step1.scss";
+import { useSourceContext } from "../../store/Context";
 
 export const Step1: FC = () => {
   const {
-    sources,
-    counter,
     searchQuery,
     filteredSources,
     noSourcesMessage,
@@ -18,7 +17,7 @@ export const Step1: FC = () => {
     removeActiveSource,
     handleSearchChange,
   } = useStep1();
-
+  const { sources } = useSourceContext();
   const limit = 5;
 
   return (
@@ -32,7 +31,7 @@ export const Step1: FC = () => {
         className="search-input"
       />
       <span className="step1-count">
-        {counter}/{limit}
+        {sources.length}/{limit}
       </span>
       <div className="step1-chips-wrapper">
         <div
@@ -57,7 +56,7 @@ export const Step1: FC = () => {
                 key={item}
                 type={item}
                 onSelect={addActiveSource}
-                disabled={counter >= limit}
+                disabled={sources.length >= limit}
                 onRemove={() => {}}
               />
             ))}
@@ -67,11 +66,12 @@ export const Step1: FC = () => {
         </div>
       </div>
       <Button
-        style={counter > 0 ? "green" : ""}
+        style={sources.length > 0 ? "green" : "regular"}
         onClick={handleButtonClick}
-        disabled={counter < 1}
+        disabled={sources.length < 1}
         label="ready"
         className="ready-button"
+        size="large"
       />
     </div>
   );

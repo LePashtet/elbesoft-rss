@@ -4,7 +4,7 @@ import Avatar from "@mui/material/Avatar";
 import clsx from "clsx";
 import { Source } from "../../SourceSelector/SourceSelector";
 import ChipIcon from "./ChipIcon";
-import "./Chip.scss"; // Import the SCSS module
+import "./Chip.scss";
 
 interface ChipProps {
   label: string;
@@ -14,6 +14,7 @@ interface ChipProps {
   type?: string;
   chipType?: Source;
   style?: "regular" | "sources";
+  className?: string;
 }
 
 const chipStyles = {
@@ -29,6 +30,7 @@ export const Chip: FC<ChipProps> = ({
   type = "click",
   onRemove,
   style = "regular",
+  className,
 }) => {
   const variant = isSelected ? "filled" : "outlined";
 
@@ -53,9 +55,10 @@ export const Chip: FC<ChipProps> = ({
       variant={isSelected !== undefined ? variant : "filled"}
       onClick={handleClick}
       className={clsx(
+        className,
         chipStyles[style],
-        type === "click" ? "click" : "not-click",
-        isSelected ? "filled" : ""
+        type === "click" ? "click" : "disable",
+        isSelected ? "filled" : "",
       )}
       classes={{
         label: "label",

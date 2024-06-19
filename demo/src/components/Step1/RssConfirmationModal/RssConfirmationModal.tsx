@@ -1,17 +1,19 @@
 import { Modal as ModalMui } from "@mui/base/Modal";
 import { ChangeEvent, FC, useState } from "react";
 import { createPortal } from "react-dom";
-import { Input } from "../../ui/Input.tsx";
+import { Input } from "../../ui/Input/Input.tsx";
 import { Backdrop } from "./Backdrop.tsx";
 import { CustomAutocomplete } from "../../ui/Autocomplete/Autocomplete.tsx";
 import { Button } from "../../ui/Button/Button.tsx";
 import { useDevice } from "../../../hooks/useDevice.ts";
+import { useSourceContext } from "../../../store/Context.tsx";
 import "./RssConfirmationModal.scss";
+import { Source } from "../../SourceSelector/SourceSelector.tsx";
 
 interface RssConfirmationModalProps {
   handleSelect: (text: string) => void;
   handleClose: () => void;
-  type?: string;
+  type: Source;
 }
 
 export const RssConfirmationModal: FC<RssConfirmationModalProps> = ({
@@ -20,8 +22,10 @@ export const RssConfirmationModal: FC<RssConfirmationModalProps> = ({
   type,
 }) => {
   const { isMobile } = useDevice();
+  const { checkDuplicate } = useSourceContext();
   const [text, setText] = useState<string>("");
   const [errorVisible, setErrorVisible] = useState<boolean>(false);
+  const [isDuplicateSource, setIsDuplicateSource] = useState(false);
 
   const excludedTypes = [
     "x",
@@ -40,7 +44,7 @@ export const RssConfirmationModal: FC<RssConfirmationModalProps> = ({
     "rumble",
   ];
 
-  const isRss = !excludedTypes.includes(type || "");
+  const isRss = !excludedTypes.includes(type);
 
   const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
     setText(event.target.value);
@@ -51,7 +55,9 @@ export const RssConfirmationModal: FC<RssConfirmationModalProps> = ({
   };
 
   const handleSelectModal = () => {
-    if (text.length >= 1) {
+    const isDuplicate = checkDuplicate(type, text);
+    setIsDuplicateSource(isDuplicate);
+    if (text.length >= 1 && !isDuplicate) {
       handleSelect(text);
     } else {
       setErrorVisible(true);
@@ -75,20 +81,19 @@ export const RssConfirmationModal: FC<RssConfirmationModalProps> = ({
         />
       );
     }
-    return (
-      <Input
-        width={isMobile ? "100%" : "400px"}
-        onChange={handleInputChange}
-        value={text}
-      />
-    );
+    return <Input onChange={handleInputChange} value={text} />;
   };
 
   const renderError = () => {
     if (!errorVisible) return null;
+
     return (
       <p className="modal-error">
-        {isRss ? "Please enter a topic of news" : "Please enter username"}
+        {isDuplicateSource
+          ? "This source already exist!"
+          : isRss
+            ? "Please enter a topic of news"
+            : "Please enter username"}
       </p>
     );
   };
@@ -108,7 +113,12 @@ export const RssConfirmationModal: FC<RssConfirmationModalProps> = ({
         {renderInput()}
         {renderError()}
         <div id="unstyled-modal-description" className="modal-action">
-          <Button style="green" label="Select" onClick={handleSelectModal} />
+          <Button
+            style="green"
+            size="large"
+            label="Select"
+            onClick={handleSelectModal}
+          />
           <Button style="transparent" label="Close" onClick={handleClose} />
         </div>
       </div>

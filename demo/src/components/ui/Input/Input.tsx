@@ -1,5 +1,7 @@
 import { FC, ChangeEvent, useState } from "react";
 import { OutlinedInput } from "@mui/material";
+import "./Input.scss";
+
 interface InputProps {
   value: string;
   onChange: (event: ChangeEvent<HTMLInputElement>) => void;
@@ -9,7 +11,6 @@ interface InputProps {
   valid?: boolean;
   onValidChange?: (isValid: boolean) => void;
   visited?: boolean;
-  width?: "100%" | "400px";
   className?: string;
 }
 
@@ -22,7 +23,6 @@ export const Input: FC<InputProps> = ({
   valid,
   onValidChange,
   visited,
-  width = "400px",
   className,
 }) => {
   const [isValid, setIsValid] = useState(valid || false);
@@ -44,30 +44,18 @@ export const Input: FC<InputProps> = ({
   };
 
   return (
-    <>
+    <div className="input-container">
       <OutlinedInput
         placeholder={placeholder}
         type={type}
         onBlur={handleBlur}
-        sx={{
-          "& input": {
-            fontFamily: "Montserrat",
-            fontSize: "18px",
-            lineHeight: "28.5px",
-            fontWeight: 400,
-          },
-          width: width,
-          height: "60px",
-        }}
         value={value}
         onChange={onChange}
-        className={className}
+        className={`${className} outlined-input`}
       />
       {visited && !isValid && (
-        <p style={{ color: "red", textAlign: "center" }}>
-          Invalid email address
-        </p>
+        <p className="error-message">Invalid email address</p>
       )}
-    </>
+    </div>
   );
 };

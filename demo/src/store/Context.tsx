@@ -11,7 +11,9 @@ interface SourceContextValue {
   userCountry: string;
   time: string;
   updateTime: (time: string) => void;
-  updateData: (newSources: Array<SourceData>, newUserCountry: string) => void;
+  updateCountry: (newUserCountry: string) => void;
+  setSources: (sources: Array<SourceData>) => void;
+  checkDuplicate: (type: Source, text: string) => boolean;
 }
 
 const SourceContext = createContext<SourceContextValue | undefined>(undefined);
@@ -31,20 +33,30 @@ export const SourceProvider: React.FC<{ children: ReactNode }> = ({
   const [userCountry, setUserCountry] = useState("");
   const [time, setTime] = useState("");
 
-  const updateData = (
-    newSources: Array<SourceData>,
-    newUserCountry: string
-  ) => {
-    setSources(newSources);
+  const updateCountry = (newUserCountry: string) => {
     setUserCountry(newUserCountry);
   };
+
   const updateTime = (time: string) => {
     setTime(time);
+  };
+  const checkDuplicate = (type: Source, text: string) => {
+    return sources.some(
+      (source) => source.type === type && source.userInput === text
+    );
   };
 
   return (
     <SourceContext.Provider
-      value={{ sources, userCountry, updateData, updateTime, time }}
+      value={{
+        sources,
+        userCountry,
+        time,
+        updateCountry,
+        updateTime,
+        setSources,
+        checkDuplicate,
+      }}
     >
       {children}
     </SourceContext.Provider>

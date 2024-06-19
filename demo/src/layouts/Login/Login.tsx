@@ -1,7 +1,6 @@
 import { ChangeEvent, FC, useState } from "react";
 import { ChipIcon } from "../../components/ui/ChipIcon";
-import { useDevice } from "../../hooks/useDevice.ts";
-import { Input } from "../../components/ui/Input.tsx";
+import { Input } from "../../components/ui/Input/Input.tsx";
 import { Button } from "../../components/ui/Button/Button.tsx";
 
 import "./Login.scss";
@@ -16,7 +15,6 @@ export const Login: FC = () => {
     setPassowrd(event.target.value);
   };
 
-  const { isMobile } = useDevice();
   return (
     <main className="login">
       <div className="login-block">
@@ -26,13 +24,13 @@ export const Login: FC = () => {
         </h1>
         <div className="login-block_form">
           <Input
-            width={isMobile ? "100%" : "400px"}
+            className="login-block_input"
             value={email}
             onChange={handleInputEmailChange}
             placeholder="Email"
           />
           <Input
-            width={isMobile ? "100%" : "400px"}
+            className="login-block_input"
             value={passowrd}
             onChange={handleInputPasswordChange}
             placeholder="Password"
