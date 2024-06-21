@@ -24,7 +24,15 @@
       gap: 15px;
       margin: 20px 0;
     }
-    &_chips{
+    &_input {
+      @media (max-width: 767px) {
+        width: 300px !important;
+      }
+      @media (max-width: 480px) {
+        width: 100% !important;
+      }
+    }
+    &_chips {
       display: flex;
       align-items: center;
       justify-content: space-between;

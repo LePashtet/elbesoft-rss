@@ -161,6 +161,163 @@ export const NEWS_TOPIC = {
     "bretStephensOpinion",
     "sundayOpinion",
   ],
+  time: [
+    "latest",
+    "us",
+    "politics",
+    "world",
+    "health",
+    "climate",
+    "business",
+    "tech",
+    "entertainment",
+    "ideas",
+    "science",
+    "history",
+    "sports",
+  ],
+  mashable: [
+    "tech",
+    // https://mashable.com/feeds/rss/tech
+
+    // 'appsSoftware',
+    // 'artificialIntelligence',
+    // 'creativeSoftware'
+    // 'productivity'
+    // 'vpn'
+    // 'antivirus'
+    // 'tiktok'
+    // 'microsoft'
+    // 'cameras'
+
+    // 'nasa'
+    // 'rocket-launches'
+    // 'environment'
+
+    // 'family-parenting'
+    // 'careers'
+    // 'sleep'
+    // 'sex-dating-relationships'
+
+    // 'activism'
+    // gender
+    // racial-justice
+    // sustainability
+    // politics
+
+    // true-crime
+    // music
+    //marvel
+    // dc-comics
+    // disney
+    // pixar
+    // streaming
+    // hbo
+    // hulu
+    // peacock
+
+    "mobile",
+    // https://mashable.com/feeds/rss/mobile
+    "smartHome",
+    // https://mashable.com/feeds/rss/smart-home
+    "socialMedia",
+    // https://mashable.com/feeds/rss/social-media
+    "tech-industry",
+    // https://mashable.com/feeds/rss/tech-industry
+    "transportation",
+    // https://mashable.com/feeds/rss/transportation
+    "android",
+    // https://mashable.com/feeds/rss/android
+    "apple",
+    // 'https://mashable.com/feeds/rss/apple'
+    "wifirouters",
+    // https://mashable.com/feeds/rss/wifirouters
+    "tvs",
+    // https://mashable.com/feeds/rss/tvs
+    "speakers",
+    // https://mashable.com/feeds/rss/speakers
+    "desktops",
+    // 'https://mashable.com/feeds/rss/desktops'
+    "laptops",
+    // https://mashable.com/feeds/rss/laptops
+    "headphones",
+    // https://mashable.com/feeds/rss/headphone
+    "tablets",
+    // https://mashable.com/feeds/rss/tablets
+    "gamingConsoles",
+    // https://mashable.com/feeds/rss/gaming-consoles
+
+    "science",
+    // https://mashable.com/feeds/rss/science
+    "animals",
+    // https://mashable.com/feeds/rss/animals
+    "climateChange",
+    // https://mashable.com/feeds/rss/climate-change
+    "space",
+    // https://mashable.com/feeds/rss/space
+
+    "life",
+    // https://mashable.com/feeds/rss/life
+    "mentalHealth",
+    // https://mashable.com/feeds/rss/mental-health
+    "houseHome",
+    // https://mashable.com/feeds/rss/house-home
+    "healthWellness",
+    // https://mashable.com/feeds/rss/health-wellness
+    "education",
+    // https://mashable.com/feeds/rss/education
+    "digital-culture",
+    // https://mashable.com/feeds/rss/digital-culture
+
+    "socialGood",
+    // https://mashable.com/feeds/rss/socialgood
+    "lgbtq",
+    //https://mashable.com/feeds/rss/lgbtq
+
+    "entertainment",
+    // https://mashable.com/feeds/rss/entertainment
+    "movies",
+    // https://mashable.com/feeds/rss/movies
+    "tvShows",
+    // https://mashable.com/feeds/rss/tv-shows
+    "games",
+    // https://mashable.com/feeds/rss/games
+    "podcasts",
+    // https://mashable.com/feeds/rss/podcasts
+
+    // 'deals',
+
+    "shopping",
+    // https://mashable.com/feeds/rss/shopping
+    "shoppingHome",
+    // https://rss.app/feeds/D5d0RwfS44kkZTIU.xml
+    "shoppingTech",
+    // https://rss.app/feeds/T7HB9CrVeUo72Tg6.xml
+
+    // 'kitchen',
+    // 'fitness',
+    // 'sexToys',
+    // 'appsSoftware',
+    // 'dating',
+    // 'giftGuides',
+    // 'mashableChoice',
+    // 'mashableSelects',
+    // 'gaming',
+
+    "travel",
+    // https://rss.app/feeds/ExoC47KBalZTPl9Z.xml
+    "travelDeals",
+    // https://mashable.com/deals/category/travel
+    "travelBest",
+    // https://rss.app/feeds/lRFp3l65HtIuOE7k.xml
+    "videos",
+    // https://mashable.com/feeds/rss/videos
+    "shows",
+    // https://rss.app/feeds/oDFFPO8DNTzyIThe.xml
+  ],
+  cnn: ["latest"],
+  newsweek: ["latest", "us", "health"],
+  cointelegraph: ["latest", "bitcoin"],
 };
 interface NewsRSS {
   [key: string]: { [key: string]: { rss: string } };
@@ -640,6 +797,196 @@ export const NEWS_RSS: NewsRSS = {
     },
     sundayOpinion: {
       rss: "https://rss.nytimes.com/services/xml/rss/nyt/sunday-review.xml",
+    },
+  },
+  time: {
+    latest: {
+      rss: "https://time.com/feed/",
+    },
+    us: {
+      rss: "https://time.com/us/feed/",
+    },
+    politics: {
+      rss: "https://time.com/politics/feed/",
+    },
+    world: {
+      rss: "https://time.com/world/feed/",
+    },
+    health: {
+      rss: "https://time.com/health/feed/",
+    },
+    climate: {
+      rss: "https://time.com/climate/feed/",
+    },
+    business: {
+      rss: "https://time.com/business/feed/",
+    },
+    tech: {
+      rss: "https://time.com/tech/feed/",
+    },
+    entertainment: {
+      rss: "https://time.com/entertainment/feed/",
+    },
+    ideas: {
+      rss: "https://time.com/ideas/feed/",
+    },
+    science: {
+      rss: "https://time.com/science/feed/",
+    },
+    history: {
+      rss: "https://time.com/history/feed/",
+    },
+    sports: {
+      rss: "https://time.com/sports/feed/",
+    },
+  },
+  mashable: {
+    tech: {
+      rss: "https://mashable.com/feeds/rss/tech",
+    },
+    mobile: {
+      rss: "https://mashable.com/feeds/rss/mobile",
+    },
+    smartHome: {
+      rss: "https://mashable.com/feeds/rss/smart-home",
+    },
+    socialMedia: {
+      rss: "https://mashable.com/feeds/rss/social-media",
+    },
+    techIndustry: {
+      rss: "https://mashable.com/feeds/rss/tech-industry",
+    },
+    transportation: {
+      rss: "https://mashable.com/feeds/rss/transportation",
+    },
+    android: {
+      rss: "https://mashable.com/feeds/rss/android",
+    },
+    apple: {
+      rss: "https://mashable.com/feeds/rss/apple",
+    },
+    wifiRouters: {
+      rss: "https://mashable.com/feeds/rss/wifirouters",
+    },
+    tvs: {
+      rss: "https://mashable.com/feeds/rss/tvs",
+    },
+    speakers: {
+      rss: "https://mashable.com/feeds/rss/speakers",
+    },
+    desktops: {
+      rss: "https://mashable.com/feeds/rss/desktops",
+    },
+    laptops: {
+      rss: "https://mashable.com/feeds/rss/laptops",
+    },
+    headphones: {
+      rss: "https://mashable.com/feeds/rss/headphones",
+    },
+    tablets: {
+      rss: "https://mashable.com/feeds/rss/tablets",
+    },
+    gamingConsoles: {
+      rss: "https://mashable.com/feeds/rss/gaming-consoles",
+    },
+    science: {
+      rss: "https://mashable.com/feeds/rss/science",
+    },
+    animals: {
+      rss: "https://mashable.com/feeds/rss/animals",
+    },
+    climateChange: {
+      rss: "https://mashable.com/feeds/rss/climate-change",
+    },
+    space: {
+      rss: "https://mashable.com/feeds/rss/space",
+    },
+    life: {
+      rss: "https://mashable.com/feeds/rss/life",
+    },
+    mentalHealth: {
+      rss: "https://mashable.com/feeds/rss/mental-health",
+    },
+    houseHome: {
+      rss: "https://mashable.com/feeds/rss/house-home",
+    },
+    healthWellness: {
+      rss: "https://mashable.com/feeds/rss/health-wellness",
+    },
+    education: {
+      rss: "https://mashable.com/feeds/rss/education",
+    },
+    digitalCulture: {
+      rss: "https://mashable.com/feeds/rss/digital-culture",
+    },
+    socialGood: {
+      rss: "https://mashable.com/feeds/rss/social-good",
+    },
+    lgbtq: {
+      rss: "https://mashable.com/feeds/rss/lgbtq",
+    },
+    entertainment: {
+      rss: "https://mashable.com/feeds/rss/entertainment",
+    },
+    movies: {
+      rss: "https://mashable.com/feeds/rss/movies",
+    },
+    tvShows: {
+      rss: "https://mashable.com/feeds/rss/tv-shows",
+    },
+    games: {
+      rss: "https://mashable.com/feeds/rss/games",
+    },
+    podcasts: {
+      rss: "https://mashable.com/feeds/rss/podcasts",
+    },
+    shopping: {
+      rss: "https://mashable.com/feeds/rss/shopping",
+    },
+    shoppingHome: {
+      rss: "https://rss.app/feeds/D5d0RwfS44kkZTIU.xml",
+    },
+    shoppingTech: {
+      rss: "https://rss.app/feeds/T7HB9CrVeUo72Tg6.xml",
+    },
+    travel: {
+      rss: "https://rss.app/feeds/ExoC47KBalZTPl9Z.xml",
+    },
+    travelDeals: {
+      rss: "https://mashable.com/deals/category/travel",
+    },
+    travelBest: {
+      rss: "https://rss.app/feeds/lRFp3l65HtIuOE7k.xml",
+    },
+    videos: {
+      rss: "https://mashable.com/feeds/rss/videos",
+    },
+    shows: {
+      rss: "https://rss.app/feeds/oDFFPO8DNTzyIThe.xml",
+    },
+  },
+  cnn: {
+    latest: {
+      rss: "https://rss.app/feeds/bw5LW9cbcGyzVS2q.xml",
+    },
+  },
+  newsweek: {
+    latest: {
+      rss: "https://www.newsweek.com/rss",
+    },
+    us: {
+      rss: "https://rss.app/feeds/HUjTjwbscjZmnQe0.xml",
+    },
+    health: {
+      rss: "https://rss.app/feeds/2rLgCRPlPd4yCn6H.xml",
+    },
+  },
+  cointelegraph: {
+    latest: {
+      rss: "https://cointelegraph.com/rss",
+    },
+    bitcoin: {
+      rss: "https://rss.app/feeds/BiRjoqUtnW6KZfqc.xml",
     },
   },
 };

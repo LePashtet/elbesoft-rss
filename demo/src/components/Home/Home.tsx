@@ -1,5 +1,5 @@
 import { useState, useEffect, useCallback } from "react";
-import { Button } from "../ui/Button";
+import { Button } from "../ui/Button/Button.tsx";
 import { getNewsletters, deleteNewsletter } from "../../api/newsletter.ts";
 import "./Home.scss";
 
