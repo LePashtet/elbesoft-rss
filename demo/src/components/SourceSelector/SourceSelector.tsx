@@ -2,19 +2,40 @@ import { FC, useState } from "react";
 import { RssConfirmationModal } from "../Step1/RssConfirmationModal/RssConfirmationModal.tsx";
 import { getUserApi } from "../../api/getUserApi.ts";
 import { SourceChip } from "./SourceChip.tsx";
+import { useSourceContext } from "../../store/Context.tsx";
 
 export type Source =
   | "instagram"
   | "x"
+  | "threads"
+  | "youTube"
   | "medium"
+  | "linkedIn"
+  | "telegram"
+  | "tikTok"
+  | "facebook"
   | "techCrunch"
   | "theGuardian"
   | "europeanParliament"
   | "nyTimes"
-  | "googleDailyMix";
+  | "googleDailyMix"
+  | "reddit"
+  | "craigslist"
+  | "newsweek"
+  | "cointelegraph"
+  | "vimeo"
+  | "pinterest"
+  | "dailymotion"
+  | "foxnews"
+  | "coindesk"
+  | "rumble"
+  | "cnn"
+  | "time"
+  | "vox"
+  | "mashable";
 
 interface SourceSelectorProps {
-  onSelect: (type: Source, text: string, userCountry: any) => void;
+  onSelect: (type: Source, text: string, userCountry: string) => void;
   type: Source;
   userInput?: string;
   onRemove: () => void;
@@ -26,14 +47,14 @@ export const SourceSelector: FC<SourceSelectorProps> = ({
   userInput,
   onSelect,
   onRemove,
-  // disabled,
+  disabled,
 }) => {
   const [openModal, setOpenModal] = useState(false);
-  // const [isDisabled, setIsDisabled] = useState(disabled);
   const [userCountry, setUserCountry] = useState("");
 
   const clickHandler = async () => {
-    // if (isDisabled) return;
+    if (disabled) return;
+    // setIsDuplicate(false);
     setOpenModal(true);
 
     const country = await getUserApi();

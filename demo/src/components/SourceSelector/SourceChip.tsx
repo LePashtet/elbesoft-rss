@@ -10,6 +10,56 @@ interface SourceChipProps {
   onRemove?: () => void;
 }
 
+const generateLabel = (
+  type: Source,
+  userInput: string | undefined,
+) => {
+  const defaultInput=userInput ? ` @${userInput}` : ""
+  const profiles: { [key in Source]: string } = {
+    instagram: `Instagram${defaultInput}`,
+    x: `X${defaultInput}`,
+    medium: `Medium${defaultInput}`,
+    telegram: `Telegram${defaultInput}`,
+    threads: `Threads${defaultInput}`,
+    reddit: `Reddit${defaultInput}`,
+    youTube: `YouTube${defaultInput}`,
+    tikTok: `TikTok${defaultInput}`,
+    facebook: `Facebook${defaultInput}`,
+    pinterest: `Pinterest${defaultInput}`,
+    linkedIn: `LinkedIn${defaultInput}`,
+    rumble: `Rumble${defaultInput}`,
+    dailymotion: `Dailymotion${defaultInput}`,
+    techCrunch: `TechCrunch`,
+    theGuardian: `The Guardian`,
+    europeanParliament: `Euro Parliament`,
+    nyTimes: `NYTimes`,
+    googleDailyMix: `Google Daily Mix`,
+    time: `Time`,
+    coindesk: `Coindesk`,
+    craigslist: `Craigslist`,
+    newsweek: `Newsweek`,
+    cointelegraph: `Cointelegraph`,
+    vimeo: `Vimeo`,
+    foxnews: `Foxnews`,
+    cnn: `CNN`,
+    vox: `Vox`,
+    mashable: `Mashable`,
+  };
+
+  const label= profiles[type];
+
+  if (userInput && !label.includes("@")) {
+    const formattedUserInput = userInput.replace(
+      /[A-Z]/g,
+      (match) => ` ${match}`
+    ).replace(/^./, userInput.charAt(0).toUpperCase());
+    
+    return `${label} ${formattedUserInput}`;
+  }
+
+  return label;
+};
+
 export const SourceChip: FC<SourceChipProps> = ({
   type,
   userInput,
@@ -17,45 +67,18 @@ export const SourceChip: FC<SourceChipProps> = ({
   onClick,
   onRemove,
 }) => {
-  let label;
-
-  switch (type) {
-    case "instagram":
-      label = `Instagram profile of @${userInput ? userInput : "______"}`;
-      break;
-    case "x":
-      label = `X profile of @${userInput ? userInput : "______"}`;
-      break;
-    case "medium":
-      label = `Medium profile of @${userInput ? userInput : "______"}`;
-      break;
-    case "techCrunch":
-      label = `TechCrunch topic of news is ${userInput ? userInput : "______"}`;
-      break;
-    case "theGuardian":
-      label = `The Guardian topic of news is ${userInput ? userInput : "______"}`;
-      break;
-    case "europeanParliament":
-      label = `Euro Parliament topic of news is ${userInput ? userInput : "______"}`;
-      break;
-    case "nyTimes":
-      label = `NYTimes topic of news is ${userInput ? userInput : "______"}`;
-      break;
-    case "googleDailyMix":
-      label = `Google Daily Mix topic of news is ${userInput ? userInput : "______"}`;
-      break;
-    default:
-      label = "profile of @ ______";
-      break;
-  }
+  const label = generateLabel(type, userInput);
 
   return (
-    <Chip
-      chipType={type}
-      label={label}
-      isSelected={isSelected}
-      onClick={onClick}
-      onRemove={onRemove}
-    />
+    <div>
+      <Chip
+        chipType={type}
+        label={label}
+        style="sources"
+        isSelected={isSelected}
+        onClick={onClick}
+        onRemove={onRemove}
+      />
+    </div>
   );
 };

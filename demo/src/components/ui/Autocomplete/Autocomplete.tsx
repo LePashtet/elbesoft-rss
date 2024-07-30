@@ -7,6 +7,7 @@ interface CustomAutocomleteProps {
   value: string;
   onChange: (newValue: string) => void;
   type: string;
+  width?: "100%" | "400px";
 }
 const formatOptionLabel = (option: string) => {
   return option
@@ -21,13 +22,30 @@ export const CustomAutocomplete: FC<CustomAutocomleteProps> = ({
   value,
   onChange,
   type,
+  width = "400px",
 }) => {
-  const { techCrunch, theGuardian, europeanParliament, nyTimes } = NEWS_TOPIC;
+  const {
+    techCrunch,
+    theGuardian,
+    europeanParliament,
+    nyTimes,
+    time,
+    mashable,
+    newsweek,
+    cointelegraph,
+    cnn,
+  } = NEWS_TOPIC;
   let optionsArray: string[] = [];
 
   switch (type) {
     case "techCrunch":
       optionsArray = techCrunch;
+      break;
+    case "time":
+      optionsArray = time;
+      break;
+    case "mashable":
+      optionsArray = mashable;
       break;
     case "theGuardian":
       optionsArray = theGuardian;
@@ -37,6 +55,15 @@ export const CustomAutocomplete: FC<CustomAutocomleteProps> = ({
       break;
     case "nyTimes":
       optionsArray = nyTimes;
+      break;
+    case "newsweek":
+      optionsArray = newsweek;
+      break;
+    case "cointelegraph":
+      optionsArray = cointelegraph;
+      break;
+    case "cnn":
+      optionsArray = cnn;
       break;
     default:
       optionsArray = [];
@@ -59,7 +86,7 @@ export const CustomAutocomplete: FC<CustomAutocomleteProps> = ({
       id="clear-on-escape"
       clearOnEscape
       sx={{
-        width: "400px",
+        width: width,
         ".MuiAutocomplete-input": {
           fontFamily: "Montserrat",
           fontSize: "18px",
